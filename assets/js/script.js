@@ -42,6 +42,14 @@ function fetchPetAPI () {
     });
 }
 
+
+getAccessToken();
+
+// Carousel 
+
+$('.carousel').carousel({ interval: 2000 });
+
+
 fetchPetAPI();
 
 $("submitBtn").addEventListener("click",searchHandler);
@@ -71,3 +79,4 @@ function searchHandler(event){
     location.assign(querySearch);
 
 }
+
