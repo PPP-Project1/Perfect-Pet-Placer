@@ -1,12 +1,12 @@
-var APIKey = "";
-var APIsecret = "";
-var type;
-var age;
-var gender;
-var size;
-var coat;
-var address;
-var distance;
+var APIKey = "iwfBo0lysmRDywH7YnUK8MqtITZWVbmzDeYpUuFE5cIJhzelM7";
+var APIsecret = "oH97v5MQBen8II1y33uDrSab6xa8NRxhDwpmx9lS";
+var type ;
+// var age;
+// var gender;
+// var size;
+// var coat;
+// var address;
+// var distance;
 
 function fetchPetAPI () {
     //this fetch call retrieves access token for user to use for 1 hour
@@ -22,7 +22,7 @@ function fetchPetAPI () {
         console.log('token',data);
 
         //this fetch call will retrieve results for pet information based on user input
-        return fetch('https://api.petfinder.com/v2/animals?type=' + type + '&age=' + age + '&gender=' + gender + '&size=' + size + '&coat=' + coat + '&address=' + address + 'distance' + distance, {
+        return fetch('https://api.petfinder.com/v2/animals?type=' + type, {
             method: 'GET',
             headers: {
                 'Authorization': data.token_type + ' ' + data.access_token,
@@ -42,32 +42,39 @@ function fetchPetAPI () {
     });
 }
 
-fetchPetAPI();
 
-$("submitBtn").addEventListener("click",searchHandler);
 
 function searchHandler(event){
     event.preventDefault();
-
-    var type = document.getElementById("").value;
-    var gender = document.getElementById("").value;
-    var age = document.getElementById("").value;
-    var size = document.getElementById("").value;
-    var coatLength = document.getElementById("").value;
-    var address = document.getElementById("").value;
-    var distance = document.getElementById("").value;
+    
+    var type = document.getElementById("animalType").value;
+    console.log(type)
+    var gender = document.getElementById("animalGender").value;
+    console.log(gender)
+    var age = document.getElementById("animalAge").value;
+    console.log(age)
+    var size = document.getElementById("animalSize").value;
+    console.log(size)
+    var coatLength = document.getElementById("animalCoatLength").value;
+    console.log(coatLength)
+    var address = document.getElementById("address").value;
+    console.log(address)
+    var distance = document.getElementById("distance").value;
+    console.log(distance)
 
     if(!type){
         console.error("Please select a type.")
     }
-
+    
     if(!address){
-        console.error("Please enter your location.")
+            console.error("Please enter your location.")
+        }
+        
+        // var querySearch = "./results.html?q+" + type + "&gender=" + gender + "&age=" + age + "&size=" + size + "&coatLength=" + 
+        // coatLength + "&address=" + address + "&distance=" + distance;
+        
+        // location.assign(querySearch);
+        
     }
-
-    var querySearch = "./results.html?q+" + type + "&gender=" + gender + "&age=" + age + "&size=" + size + "&coatLength=" + 
-    coatLength + "&address=" + address + "&distance=" + distance;
-
-    location.assign(querySearch);
-
-}
+    fetchPetAPI();
+    $("#submitBtn").click(searchHandler);

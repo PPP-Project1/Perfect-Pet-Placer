@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <header class="container-fluid text-white">
+    <header class="container-fluid text-white bg-dark">
         <h1 class="mb-0">Perfect Pet Placer</h1>
     </header>
    
@@ -45,7 +45,7 @@
                     <p class="card-text">Select your type of pet and provide your zip-code as well as any other search criteria you would like to include.</p>.</p>
                     
                     <form id="search-form" class="form w-100">
-                        <select id="format-input" class="form-input w-100">
+                        <select id="animalType" class="form-input w-100">
                           <option value="" disabled selected>Select Type of Pet</option>
                           <option value="dog">Dog</option>
                           <option value="cat">Cat</option>
@@ -55,9 +55,9 @@
                     </form>
                     <br>
                     <form id="search-form" class="form w-100">
-                        <select id="format-input" class="form-input w-100">
+                        <select id="animalAge" class="form-input w-100">
                           <option value="" disabled selected>Select an Age</option>
-                          <option value=" baby">Baby</option>
+                          <option value="baby">Baby</option>
                           <option value="young">Young</option>
                           <option value="adult">Adult</option>
                           <option value="senior">Senior</option>
@@ -65,7 +65,7 @@
                     </form>
                     <br>
                     <form id="search-form" class="form w-100">
-                        <select id="format-input" class="form-input w-100">
+                        <select id="animalGender" class="form-input w-100">
                           <option value="" disabled selected>Select a Gender</option>
                           <option value="male">Male</option>
                           <option value="female">Female</option>
@@ -74,7 +74,7 @@
                     </form>
                     <br>
                     <form id="search-form" class="form w-100">
-                        <select id="format-input" class="form-input w-100">
+                        <select id="animalSize" class="form-input w-100">
                           <option value="" disabled selected>Select a Size</option>
                           <option value="small">Small</option>
                           <option value="medium">Medium</option>
@@ -84,7 +84,7 @@
                     </form>
                     <br>
                     <form id="search-form" class="form w-100">
-                        <select id="format-input" class="form-input w-100">
+                        <select id="animalCoatLength" class="form-input w-100">
                           <option value="" disabled selected>Select a Coat-Length</option>
                           <option value="short">Short</option>
                           <option value="mediumCoat">Medium</option>
@@ -99,14 +99,14 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="inputGroup-sizing-default">Zip-Code</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <input id="address" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                       </div>
                     <br>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="inputGroup-sizing-default">How Far Should We Search?</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <input id="distance" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                       </div>
                       <br>
                     <button type="button" class="btn btn-primary btn-lg" id="submitBtn">Search!</button>
@@ -139,7 +139,7 @@
 
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+    <script src="./assets/js/script.js"></script>
     
 </body>
 </html>
