@@ -54,19 +54,19 @@ function searchHandler(event){
     var age = document.getElementById("").value;
     var size = document.getElementById("").value;
     var coatLength = document.getElementById("").value;
-    var location = document.getElementById("").value;
-    var radius = document.getElementById("").value;
+    var address = document.getElementById("").value;
+    var distance = document.getElementById("").value;
 
     if(!type){
         console.error("Please select a type.")
     }
 
-    if(!location){
+    if(!address){
         console.error("Please enter your location.")
     }
 
     var querySearch = "./results.html?q+" + type + "&gender=" + gender + "&age=" + age + "&size=" + size + "&coatLength=" + 
-    coatLength + "&location=" + location + "&radius=" + radius;
+    coatLength + "&address=" + address + "&distance=" + distance;
 
     location.assign(querySearch);
 
