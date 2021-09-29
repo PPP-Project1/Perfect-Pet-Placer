@@ -42,18 +42,12 @@ function fetchPetAPI () {
     });
 }
 
-<<<<<<< HEAD
-=======
-
-getAccessToken();
-
 // Carousel 
 
 $('.carousel').carousel({ interval: 2000 });
 
 
 fetchPetAPI();
->>>>>>> d6f4a95bc6db819421811b17b9a29e14aefa138c
 
 
 function searchHandler(event){
@@ -88,16 +82,5 @@ function searchHandler(event){
         // location.assign(querySearch);
         
     }
-<<<<<<< HEAD
     fetchPetAPI();
     $("#submitBtn").click(searchHandler);
-=======
-
-    var querySearch = "./results.html?q+" + type + "&gender=" + gender + "&age=" + age + "&size=" + size + "&coatLength=" + 
-    coatLength + "&address=" + address + "&distance=" + distance;
-
-    location.assign(querySearch);
-
-}
-
->>>>>>> d6f4a95bc6db819421811b17b9a29e14aefa138c
