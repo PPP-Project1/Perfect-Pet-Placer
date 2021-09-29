@@ -36,5 +36,7 @@ function getAccessToken () {
 
 getAccessToken();
 
+// Carousel 
 
+$('.carousel').carousel({ interval: 2000 });
 
