@@ -42,6 +42,7 @@ function fetchPetAPI () {
     });
 }
 
+
 // Carousel 
 
 $('.carousel').carousel({ interval: 2000 });
@@ -82,5 +83,7 @@ function searchHandler(event){
         // location.assign(querySearch);
         
     }
+
     fetchPetAPI();
     $("#submitBtn").click(searchHandler);
+
