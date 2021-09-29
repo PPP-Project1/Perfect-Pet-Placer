@@ -1,132 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfect Pet Placer</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ephesis&family=PT+Sans+Caption&family=Righteous&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
 <body>
 
     <header class="container-fluid text-white bg-dark">
         <h1 class="mb-0">Perfect Pet Placer</h1>
     </header>
-   
+
     <div id="carouselControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <img class="d-block w-100" src="./img-hero-placeholder.jpg" alt="First slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5 class="heroMessage">Title of Slide</h5>
-                    <p class="quote">Quote</p>
-                </div>
-            </div>             
-            <a class="carousel-control-prev" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
+        <div class="carousel-inner">
+            <img class="d-block w-100" src="./img-hero-placeholder.jpg" alt="First slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="heroMessage">Title of Slide</h5>
+                <p class="quote">Quote</p>
+            </div>
+        </div>
+        <a class="carousel-control-prev" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
-    
+
     <div class="container-fluid">
         <div class="row m-5 p-2 justify-content-center">
             <div class="col-lg-6 mb-4">
                 <div class="card">
                     <div class="card-body">
-                    <h5 class="card-title">Search for Your New Best Friend!</h5>
-                    <p class="card-text">Select your type of pet and provide your zip-code as well as any other search criteria you would like to include.</p>.</p>
-                    
-                    <form id="search-form" class="form w-100">
-                        <select id="format-input" class="form-input w-100">
-                          <option value="" disabled selected>Select Type of Pet</option>
-                          <option value="dog">Dog</option>
-                          <option value="cat">Cat</option>
-                          <option value="rabbit">Rabbit</option>
-                          <option value="bird">Bird</option>
-                        </select>
-                    </form>
-                    <br>
-                    <form id="search-form" class="form w-100">
-                        <select id="format-input" class="form-input w-100">
-                          <option value="" disabled selected>Select an Age</option>
-                          <option value=" baby">Baby</option>
-                          <option value="young">Young</option>
-                          <option value="adult">Adult</option>
-                          <option value="senior">Senior</option>
-                        </select>
-                    </form>
-                    <br>
-                    <form id="search-form" class="form w-100">
-                        <select id="format-input" class="form-input w-100">
-                          <option value="" disabled selected>Select a Gender</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          <option value="unknown">Unknown</option>
-                        </select>
-                    </form>
-                    <br>
-                    <form id="search-form" class="form w-100">
-                        <select id="format-input" class="form-input w-100">
-                          <option value="" disabled selected>Select a Size</option>
-                          <option value="small">Small</option>
-                          <option value="medium">Medium</option>
-                          <option value="large">Large</option>
-                          <option value="extraLarge">Extra-Large</option>
-                        </select>
-                    </form>
-                    <br>
-                    <form id="search-form" class="form w-100">
-                        <select id="format-input" class="form-input w-100">
-                          <option value="" disabled selected>Select a Coat-Length</option>
-                          <option value="short">Short</option>
-                          <option value="mediumCoat">Medium</option>
-                          <option value="long">Long</option>
-                          <option value="wire">Wire</option>
-                          <option value="hairless">Hairless</option>
-                          <option value="curly">Curly</option>
-                        </select>
-                    </form>
-                    <br>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroup-sizing-default">Zip-Code</span>
+                        <h5 class="card-title">Search for Your New Best Friend!</h5>
+                        <p class="card-text">Select your type of pet and provide your zip-code as well as any other
+                            search criteria you would like to include.</p>.</p>
+
+                        <form id="search-form" class="form w-100">
+                            <select id="animalType" class="form-input w-100">
+                                <option value="" disabled selected>Select Type of Pet</option>
+                                <option value="dog">Dog</option>
+                                <option value="cat">Cat</option>
+                                <option value="rabbit">Rabbit</option>
+                                <option value="bird">Bird</option>
+                            </select>
+                        </form>
+                        <br>
+                        <form id="search-form" class="form w-100">
+                            <select id="animalAge" class="form-input w-100">
+                                <option value="" disabled selected>Select an Age</option>
+                                <option value="baby">Baby</option>
+                                <option value="young">Young</option>
+                                <option value="adult">Adult</option>
+                                <option value="senior">Senior</option>
+                            </select>
+                        </form>
+                        <br>
+                        <form id="search-form" class="form w-100">
+                            <select id="animalGender" class="form-input w-100">
+                                <option value="" disabled selected>Select a Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="unknown">Unknown</option>
+                            </select>
+                        </form>
+                        <br>
+                        <form id="search-form" class="form w-100">
+                            <select id="animalSize" class="form-input w-100">
+                                <option value="" disabled selected>Select a Size</option>
+                                <option value="small">Small</option>
+                                <option value="medium">Medium</option>
+                                <option value="large">Large</option>
+                                <option value="extraLarge">Extra-Large</option>
+                            </select>
+                        </form>
+                        <br>
+                        <form id="search-form" class="form w-100">
+                            <select id="animalCoatLength" class="form-input w-100">
+                                <option value="" disabled selected>Select a Coat-Length</option>
+                                <option value="short">Short</option>
+                                <option value="mediumCoat">Medium</option>
+                                <option value="long">Long</option>
+                                <option value="wire">Wire</option>
+                                <option value="hairless">Hairless</option>
+                                <option value="curly">Curly</option>
+                            </select>
+                        </form>
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Zip-Code</span>
+                            </div>
+                            <input id="address" type="text" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default">
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                      </div>
-                    <br>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroup-sizing-default">How Far Should We Search?</span>
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">How Far Should We
+                                    Search?</span>
+                            </div>
+                            <input id="distance" type="text" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default">
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                      </div>
-                      <br>
-                    <button type="button" class="btn btn-primary btn-lg" id="submitBtn">Search!</button>
+                        <br>
+                        <button type="button" class="btn btn-primary btn-lg" id="submitBtn">Search!</button>
                     </div>
                 </div>
             </div>
-        
+
             <div class="col-lg-6 mb-4">
                 <div class="card">
                     <div class="card-body">
-                    <h5 class="card-title">Every pet leaves a unique paw-print on your heart...</h5>
-                    <p class="card-text"><img src ="images/baby-blinky.png"> Let’s find your new best friend with help from Perfect Pet Placer!
+                        <h5 class="card-title">Every pet leaves a unique paw-print on your heart...</h5>
+                        <p class="card-text"><img src="images/baby-blinky.png"> Let’s find your new best friend with
+                            help from Perfect Pet Placer!
 
-                        Did you know that an estimated 6.3 million animals end up in U.S. animal shelters nationwide each year? Of those 6.3 million, it is approximated that 920,000 of them are euthanized.
-                        
-                        Help us, help you, be a part of ending the cycle! Each year an astounding 4 million animals are adopted out of shelters, but that is still leaving 2 million without homes, join us in lowering that number and bring home a fur-family member today!
-                        
-                        Owning a pet has been shown to reduce feelings of loneliness, reduce stress as well as anxiety! Want a low maintenance fur-baby? A feline might be your perfect pet, often independent and quiet, they’re amazing for those short on time, but not on love. 
-                        Do you need to get moving? Bring home a canine, to get you on your feet and out the door and often making new friends along the way!
-                        
-                        Also please use the extensive list of shelters and rescues in your area as a resource and safe space to bring found or abandoned animals, because it has been reported that almost 800,000 animals who enter shelters as strays are returned to their owners, and we want to make sure that Fido makes it back home safe and sound!
-                        
-                        These approximations are provided by: https://www.aspca.org/helping-people-pets/shelter-intake-and-surrender/pet-statistics
+                            Did you know that an estimated 6.3 million animals end up in U.S. animal shelters nationwide
+                            each year? Of those 6.3 million, it is approximated that 920,000 of them are euthanized.
+
+                            Help us, help you, be a part of ending the cycle! Each year an astounding 4 million animals
+                            are adopted out of shelters, but that is still leaving 2 million without homes, join us in
+                            lowering that number and bring home a fur-family member today!
+
+                            Owning a pet has been shown to reduce feelings of loneliness, reduce stress as well as
+                            anxiety! Want a low maintenance fur-baby? A feline might be your perfect pet, often
+                            independent and quiet, they’re amazing for those short on time, but not on love.
+                            Do you need to get moving? Bring home a canine, to get you on your feet and out the door and
+                            often making new friends along the way!
+
+                            Also please use the extensive list of shelters and rescues in your area as a resource and
+                            safe space to bring found or abandoned animals, because it has been reported that almost
+                            800,000 animals who enter shelters as strays are returned to their owners, and we want to
+                            make sure that Fido makes it back home safe and sound!
+
+                            These approximations are provided by:
+                            https://www.aspca.org/helping-people-pets/shelter-intake-and-surrender/pet-statistics
                         </p>
                     </div>
                 </div>
@@ -134,9 +157,11 @@
         </div>
     </div>
 
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
-    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./assets/js/script.js"></script>
+
 </body>
+
 </html>
