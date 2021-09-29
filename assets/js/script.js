@@ -35,3 +35,31 @@ function getAccessToken () {
 }
 
 getAccessToken();
+
+$("submitBtn").addEventListener("click",searchHandler);
+
+function searchHandler(event){
+    event.preventDefault();
+
+    var type = document.getElementById("").value;
+    var gender = document.getElementById("").value;
+    var age = document.getElementById("").value;
+    var size = document.getElementById("").value;
+    var coatLength = document.getElementById("").value;
+    var location = document.getElementById("").value;
+    var radius = document.getElementById("").value;
+
+    if(!type){
+        console.error("Please select a type.")
+    }
+
+    if(!location){
+        console.error("Please enter your location.")
+    }
+
+    var querySearch = "./results.html?q+" + type + "&gender=" + gender + "&age=" + age + "&size=" + size + "&coatLength=" + 
+    coatLength + "&location=" + location + "&radius=" + radius;
+
+    location.assign(querySearch);
+
+}
