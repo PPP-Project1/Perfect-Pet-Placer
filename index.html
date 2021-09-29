@@ -7,13 +7,17 @@
     <title>Perfect Pet Placer</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-
-    <!-- Script tags -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ephesis&family=PT+Sans+Caption&family=Righteous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
+
 <body>
+
     <header class="container-fluid text-white bg-dark">
         <h1 class="mb-0">Perfect Pet Placer</h1>
     </header>   
@@ -79,8 +83,75 @@
             <div class="col-lg-6 mb-4">
                 <div class="card">
                     <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 class="card-title">Search for Your New Best Friend!</h5>
+                    <p class="card-text">Select your type of pet and provide your zip-code as well as any other search criteria you would like to include.</p>.</p>
+                    
+                    <form id="search-form" class="form w-100">
+                        <select id="format-input" class="form-input w-100">
+                          <option value="" disabled selected>Select Type of Pet</option>
+                          <option value="dog">Dog</option>
+                          <option value="cat">Cat</option>
+                          <option value="rabbit">Rabbit</option>
+                          <option value="bird">Bird</option>
+                        </select>
+                    </form>
+                    <br>
+                    <form id="search-form" class="form w-100">
+                        <select id="format-input" class="form-input w-100">
+                          <option value="" disabled selected>Select an Age</option>
+                          <option value=" baby">Baby</option>
+                          <option value="young">Young</option>
+                          <option value="adult">Adult</option>
+                          <option value="senior">Senior</option>
+                        </select>
+                    </form>
+                    <br>
+                    <form id="search-form" class="form w-100">
+                        <select id="format-input" class="form-input w-100">
+                          <option value="" disabled selected>Select a Gender</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="unknown">Unknown</option>
+                        </select>
+                    </form>
+                    <br>
+                    <form id="search-form" class="form w-100">
+                        <select id="format-input" class="form-input w-100">
+                          <option value="" disabled selected>Select a Size</option>
+                          <option value="small">Small</option>
+                          <option value="medium">Medium</option>
+                          <option value="large">Large</option>
+                          <option value="extraLarge">Extra-Large</option>
+                        </select>
+                    </form>
+                    <br>
+                    <form id="search-form" class="form w-100">
+                        <select id="format-input" class="form-input w-100">
+                          <option value="" disabled selected>Select a Coat-Length</option>
+                          <option value="short">Short</option>
+                          <option value="mediumCoat">Medium</option>
+                          <option value="long">Long</option>
+                          <option value="wire">Wire</option>
+                          <option value="hairless">Hairless</option>
+                          <option value="curly">Curly</option>
+                        </select>
+                    </form>
+                    <br>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroup-sizing-default">Zip-Code</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                      </div>
+                    <br>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroup-sizing-default">How Far Should We Search?</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                      </div>
+                      <br>
+                    <button type="button" class="btn btn-primary btn-lg" id="submitBtn">Search!</button>
                     </div>
                 </div>
             </div>
@@ -88,8 +159,8 @@
             <div class="col-lg-6 mb-4">
                 <div class="card">
                     <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Every pet leaves a unique paw-print on your heart, let’s find your new best friend with help from Perfect Pet Placer!
+                    <h5 class="card-title">Every pet leaves a unique paw-print on your heart...</h5>
+                    <p class="card-text"><img src ="images/baby-blinky.png"> Let’s find your new best friend with help from Perfect Pet Placer!
 
                         Did you know that an estimated 6.3 million animals end up in U.S. animal shelters nationwide each year? Of those 6.3 million, it is approximated that 920,000 of them are euthanized.
                         
@@ -108,7 +179,9 @@
         </div>
     </div>
 
+
     <script src="assets/js/script.js"></script>
-  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
 </body>
 </html>

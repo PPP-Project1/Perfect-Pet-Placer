@@ -1,0 +1,16 @@
+body{
+    font-family: 'PT Sans Caption', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    font-family: 'Righteous', cursive;
+    background: rgb(28, 165, 184);
+}
+
+.card{
+    border-color: rgb(28, 165, 184);
+    border-style: solid;
+    border-width: 3px;
+}
