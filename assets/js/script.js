@@ -106,10 +106,10 @@ function searchHandler(event){
         console.error("Please enter your location.")
     }
         
-        var querySearch = "./results.html?q+" + type + "&gender=" + gender + "&age=" + age + "&size=" + size + "&coatLength=" + 
-        coatLength + "&address=" + address + "&distance=" + distance;
+        // var querySearch = "./results.html?q+" + type + "&gender=" + gender + "&age=" + age + "&size=" + size + "&coatLength=" + 
+        // coatLength + "&address=" + address + "&distance=" + distance;
         
-        location.assign(querySearch);
+        // location.assign(querySearch);
         
     }
 
