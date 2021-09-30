@@ -1,3 +1,11 @@
+var type ;
+var age;
+var gender;
+var size;
+var coat;
+var address;
+var distance;
+
 //carousel 
 $('.carousel').carousel({ interval: 2000 });
 
@@ -20,6 +28,7 @@ function fetchToken () {
 
     })
 }
+
 
 function fetchPetAPI (token) {
 
@@ -100,6 +109,33 @@ function searchHandler(event){
         //location.assign(querySearch);
         
     }
+
+// Local Storage 
+
+    // container with which to store
+    var searchForm = document.getElementById("search-form");
+    var formContainer = document.querySelector(".form-input");
+
+
+    //array to hold objects (not sure what name the array) add list from above
+    var form = {
+
+    // objects to hold input 
+        animalType: type,
+    };
+
+    // This function will take in the object form and it stores an object LocalStorage.
+    var addFormInfo = function(form){
+        // form.push(form);
+        localStorage.setItem("formInput", JSON.stringify(form));
+        console.log(localStorage);
+    }
+
+    // petsearch.api.com/age=form.animalAge&coattype=& 
+    // perform search through api using parameters from person searching 
+
+    // Go back button
+    // document.querySelector('form').reset();     // clears form for next entry
 
 
 $("#submitBtn").click(searchHandler);
