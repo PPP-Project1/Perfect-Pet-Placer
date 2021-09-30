@@ -8,6 +8,10 @@ body{
 header{
     font-family: 'Righteous', cursive;
     background: rgb(28, 165, 184);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;  
 }
 
 /* Class selectors */
@@ -22,9 +26,20 @@ header{
     font-size: 30px;
 }
 
+
 .heroMessage{
     font-family: 'Yellowtail', cursive;
     font-size: 40px;
+}
+
+
+.rounded{
+    width: 70%;
+    padding-bottom: 10px;
+}
+
+.dropdown{
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 .modal {
