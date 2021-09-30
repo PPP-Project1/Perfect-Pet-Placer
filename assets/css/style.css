@@ -1,3 +1,4 @@
+
 body{
     font-family: 'PT Sans Caption', sans-serif;
     margin: 0;
@@ -9,8 +10,19 @@ header{
     background: rgb(28, 165, 184);
 }
 
+/* Class selectors */
 .card{
     border-color: rgb(28, 165, 184);
     border-style: solid;
     border-width: 3px;
+}
+
+.card-title{
+    font-family: 'Architects Daughter', cursive;
+    font-size: 30px;
+}
+
+.heroMessage{
+    font-family: 'Yellowtail', cursive;
+    font-size: 40px;
 }
