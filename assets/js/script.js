@@ -75,7 +75,7 @@ function initMap(){
     }
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
     console.log(map);
-    }
+}
 
 function searchHandler(event){
     event.preventDefault();
