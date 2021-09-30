@@ -63,10 +63,10 @@ function fetchGoogleApi() {
         })
 }; 
 
-var lon1 = data.results.location.lng;
-console.log(lon1)
-var lat1 = data.results.location.lat;
-console.log(lat1)
+// var lon1 = data.results.location.lng;
+// console.log(lon1)
+// var lat1 = data.results.location.lat;
+// console.log(lat1)
 
 function initMap(){
     var mapOptions= {
@@ -75,7 +75,7 @@ function initMap(){
     }
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
     console.log(map);
-    }
+}
 
 function searchHandler(event){
     event.preventDefault();
@@ -110,6 +110,24 @@ function searchHandler(event){
         
     }
 
+//modal
+function modal() {
+    var modalContainer = document.getElementById("modal-container");
+    var closeModal = document.getElementsByClassName("close-modal")[0];
+
+    modalContainer.style.display = "block";
+
+    closeModal.onclick = function() {
+        modalContainer.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modalContainer) {
+            modalContainer.style.display = "none";
+        }
+    }
+}
+
 // Local Storage 
 
     // container with which to store
@@ -139,3 +157,4 @@ function searchHandler(event){
 
 
 $("#submitBtn").click(searchHandler);
+$("#modal-btn").click(modal);
