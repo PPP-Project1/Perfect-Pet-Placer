@@ -128,6 +128,12 @@ function modal() {
     }
 }
 
+//moves user back to landing page
+function backPage() {
+    location.assign("./index.html");
+    //in the future, maybe we can clear out local storage in this next line
+}
+
 // Local Storage 
 
     // container with which to store
@@ -158,3 +164,4 @@ function modal() {
 
 $("#submitBtn").click(searchHandler);
 $("#modal-btn").click(modal);
+$("#back-btn").click(backPage)
