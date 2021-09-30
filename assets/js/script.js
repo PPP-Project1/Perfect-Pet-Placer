@@ -53,6 +53,7 @@ var rescueAddress = "1309"+"Highland"+"Place"+"Faribault"+"MN";
 //This may need to be variables of "address1 + city + state" from the petfinder api
 var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + rescueAddress + "&key=" + apiKey2;
 
+//Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
 function fetchGoogleApi() {
     fetch(geoURL)
         .then(function (res) {
@@ -68,6 +69,7 @@ function fetchGoogleApi() {
 // var lat1 = data.results.location.lat;
 // console.log(lat1)
 
+//Function to add the physical map to the modal
 function initMap(){
     var mapOptions= {
         zoom:8,
@@ -77,6 +79,7 @@ function initMap(){
     console.log(map);
 }
 
+//Function to connect API varibales to the HTML elements associated with them as well as sending the user to the results page
 function searchHandler(event){
     event.preventDefault();
     
@@ -103,10 +106,10 @@ function searchHandler(event){
         console.error("Please enter your location.")
     }
         
-        //var querySearch = "./results.html?q+" + type + "&gender=" + gender + "&age=" + age + "&size=" + size + "&coatLength=" + 
-        //coatLength + "&address=" + address + "&distance=" + distance;
+        var querySearch = "./results.html?q+" + type + "&gender=" + gender + "&age=" + age + "&size=" + size + "&coatLength=" + 
+        coatLength + "&address=" + address + "&distance=" + distance;
         
-        //location.assign(querySearch);
+        location.assign(querySearch);
         
     }
 
