@@ -20,30 +20,21 @@
         <button class="btn btn-primary mb-3" type="button" id="go-back">Go back</button>
     </header>
 
-    <div class="container-fluid">
-
-        <div class="row m-3 p-2 justify-content-center">
+    <div class="container-fluid justify-content-around">
+        <div class="row m-3 p-2">
             <div class="col-lg-3 bg-light">
                 <h2 class="mt-1">Search Results</h2>
-                <div class="search mb-3">
-                    <input id="enter-pet" type="text" class="form-control" placeholder="Enter a pet"
-                        aria-label="Enter a pet">
-                    <div class="search-append">
-                        <button class="btn btn-primary" type="button" id="search-button">
-                            <i class="fas fa-search"></i>
-                        </button>
+                <div class="card" style="width: 18rem;">
+                    <img class=" petPhoto card-img-top" src="" alt="Card image cap">
+                    <div class="card-body">
+                        <h3 class=petName>Pet Name</h3>
+                        <p class="breed card-text">Pet Breed</p>
+                        <p class="distanceFrom">Distance </p>
                     </div>
-                    <div>
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Card image cap">
+                </div>
+                <!-- <div class="card">
                             <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
-                        </div>
-                        <!-- <div class="card">
-                            <div class="card-body">
-                                This is some text within a card body.
+                                This is some text within a card body.git
                             </div>
                         </div>
                         <div class="card">
@@ -56,54 +47,31 @@
                                 This is some text within a card body.
                             </div>
                         </div> -->
-                    </div>
-                </div>
             </div>
 
-            <div class="col-lg-9">
+            <div class="col-lg-9 justify-content-around">
                 <div class="row">
-                    <div class="col-lg-11 card m-3 d-none" id="card-results">
+                    <div class="card w-75">
                         <div class="card-body">
-                            This is some text within a card body.
+                            <img class="petPhoto" src="" alt="Pet Photo">
+                            <h5 class="petName">Card title</h5>
+                            <p class="breed card-text">Pet Breed</p>
+                            <p class="distanceFrom">Distance </p>
+                            <p class="petBio">Pet Bio</p>
                         </div>
                     </div>
-                    <div class="card">
+                </div>
+                <div class="row">
+                    <div class="card w-75">
                         <div class="card-body">
-                            This is some text within a card body.
                             <h5 class="card-title">Google Maps</h5>
                             <p id="">text</p>
-                            <div id="map"></div>
+                            <div id="map">Map</div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            This is some text within a card body.
-                        </div>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-9">
-            <div class="row">
-                <div class="col-lg-11 card mb-3 d-none" id="card-results">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-11 card m-3 d-none" id="google-maps">
-                    <div class="card-body">
-                        <h5 class="card-title">Google Maps</h5>
-                        <p id="map">text</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <script async defer
