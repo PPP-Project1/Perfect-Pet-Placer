@@ -14,7 +14,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Ephesis&family=Kaushan+Script&family=Marck+Script&family=PT+Sans+Caption&family=Righteous&family=Yellowtail&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Ephesis&family=Kaushan+Script&family=Marck+Script&family=PT+Sans+Caption&family=Righteous&family=Yellowtail&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -73,56 +75,22 @@
                             <p class="breed card-text">Pet Breed</p>
                             <p class="distanceFrom">Distance </p>
                             <p class="petBio">Pet Bio</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="card w-75">
-                        <div class="card-body">
-                            <h5 class="card-title">Google Maps</h5>
-                            <p id="">text</p>
-                            <div id="map">Map</div>
+                            <button id="modal-btn">Open Modal</button>
+                            <div id="modal-container" class="modal">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <span class="close-modal">&times;</span>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>GOOGLE MAPS</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-9">
-            <div class="row">
-                <div class="col-lg-11 card mb-3 d-none" id="card-results">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-11 card m-3 d-none" id="google-maps">
-                    <div class="card-body">
-                        <h5 class="card-title">Google Maps</h5>
-                        <p id="map">text</p>
-                    </div>
-                </div>
-            </div>
-            
-            <button id="modal-btn">Open Modal</button>
-            
-            <div id="modal-container" class="modal">
-            
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <span class="close-modal">&times;</span>
-                    </div>
-                    <div class="modal-body">
-                        <p>GOOGLE MAPS</p>
-                    </div>
-                </div>
-            
-            </div>
-        </div>
-    </div>
     </div>
 
     <script async defer
