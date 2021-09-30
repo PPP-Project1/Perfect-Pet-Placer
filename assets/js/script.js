@@ -6,32 +6,25 @@ var coatLength;
 var address;
 var distance;
 
-//carousel
-$(".carousel").carousel({ interval: 2000 });
+//carousel 
+$('.carousel').carousel({ interval: 2000 });
 
-function fetchToken() {
-  var APIKey = "iwfBo0lysmRDywH7YnUK8MqtITZWVbmzDeYpUuFE5cIJhzelM7";
-  var APIsecret = "oH97v5MQBen8II1y33uDrSab6xa8NRxhDwpmx9lS";
-
-  //this fetch call retrieves access token for user to use for 1 hour
-  fetch("https://api.petfinder.com/v2/oauth2/token", {
-    method: "POST",
-    body:
-      "grant_type=client_credentials&client_id=" +
-      APIKey +
-      "&client_secret=" +
-      APIsecret,
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-  })
-    .then(function (resp) {
-      return resp.json();
-    })
-    .then(function (token) {
-      return fetchPetAPI(token);
-    });
-}
+function fetchToken () {
+    var APIKey = "iwfBo0lysmRDywH7YnUK8MqtITZWVbmzDeYpUuFE5cIJhzelM7";
+    var APIsecret = "oH97v5MQBen8II1y33uDrSab6xa8NRxhDwpmx9lS";
+    
+    //this fetch call retrieves access token for user to use for 1 hour
+    fetch('https://api.petfinder.com/v2/oauth2/token', {
+        method: 'POST',
+        body: 'grant_type=client_credentials&client_id=' + APIKey + '&client_secret=' + APIsecret,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }).then(function (resp) {
+        return resp.json();
+        
+    }).then(function(token) {
+        return fetchPetAPI(token);
 
 function fetchPetAPI(token) {
   //this fetch call will retrieve results for pet information based on user input
@@ -119,3 +112,65 @@ var addFormInfo = function (UserInputForm) {
 // document.querySelector('form').reset();     // clears form for next entry
 
 $("#submitBtn").click(searchHandler);
+var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
+var rescueAddress = "1309"+"Highland"+"Place"+"Faribault"+"MN";
+//This may need to be variables of "address1 + city + state" from the petfinder api
+var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + rescueAddress + "&key=" + apiKey2;
+
+function fetchGoogleApi() {
+    fetch(geoURL)
+        .then(function (res) {
+            return res.json();
+        })
+        .then(function (data) {
+            console.log(data)
+        })
+}; 
+
+// var lon1 = data.results.location.lng;
+// console.log(lon1)
+// var lat1 = data.results.location.lat;
+// console.log(lat1)
+
+function initMap(){
+    var mapOptions= {
+        zoom:8,
+        center:{lat: -34.397, lng: 150.644},
+    }
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    console.log(map);
+}
+
+
+//modal
+function modal() {
+    var modalContainer = document.getElementById("modal-container");
+    var closeModal = document.getElementsByClassName("close-modal")[0];
+
+    modalContainer.style.display = "block";
+
+    closeModal.onclick = function() {
+        modalContainer.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modalContainer) {
+            modalContainer.style.display = "none";
+        }
+    }
+}
+
+//moves user back to landing page
+function backPage() {
+    location.assign("./index.html");
+    //in the future, maybe we can clear out local storage in this next line
+}
+
+
+    // Go back button
+    // document.querySelector('form').reset();     // clears form for next entry
+
+
+$("#submitBtn").click(searchHandler);
+$("#modal-btn").click(modal);
+$("#back-btn").click(backPage)
