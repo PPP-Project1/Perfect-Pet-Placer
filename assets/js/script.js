@@ -1,12 +1,12 @@
 var APIKey = "iwfBo0lysmRDywH7YnUK8MqtITZWVbmzDeYpUuFE5cIJhzelM7";
 var APIsecret = "oH97v5MQBen8II1y33uDrSab6xa8NRxhDwpmx9lS";
 var type ;
-// var age;
-// var gender;
-// var size;
-// var coat;
-// var address;
-// var distance;
+var age;
+var gender;
+var size;
+var coat;
+var address;
+var distance;
 
 function fetchPetAPI () {
     //this fetch call retrieves access token for user to use for 1 hour
@@ -22,7 +22,7 @@ function fetchPetAPI () {
         console.log('token',data);
 
         //this fetch call will retrieve results for pet information based on user input
-        return fetch('https://api.petfinder.com/v2/animals?type=' + type, {
+        return fetch('https://api.petfinder.com/v2/animals?type=' + type + "?age=" + age, {
             method: 'GET',
             headers: {
                 'Authorization': data.token_type + ' ' + data.access_token,
@@ -83,6 +83,33 @@ function searchHandler(event){
         // location.assign(querySearch);
         
     }
+
+// Local Storage 
+
+    // container with which to store
+    var searchForm = document.getElementById("search-form");
+    var formContainer = document.querySelector(".form-input");
+
+
+    //array to hold objects (not sure what name the array) add list from above
+    var form = {
+
+    // objects to hold input 
+        animalType: type,
+    };
+
+    // This function will take in the object form and it stores an object LocalStorage.
+    var addFormInfo = function(form){
+        // form.push(form);
+        localStorage.setItem("formInput", JSON.stringify(form));
+        console.log(localStorage);
+    }
+
+    // petsearch.api.com/age=form.animalAge&coattype=& 
+    // perform search through api using parameters from person searching 
+
+    // Go back button
+    // document.querySelector('form').reset();     // clears form for next entry
 
     fetchPetAPI();
     $("#submitBtn").click(searchHandler);
