@@ -14,7 +14,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Ephesis&family=Kaushan+Script&family=Marck+Script&family=PT+Sans+Caption&family=Righteous&family=Yellowtail&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Ephesis&family=Kaushan+Script&family=Marck+Script&family=PT+Sans+Caption&family=Righteous&family=Yellowtail&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -30,110 +32,57 @@
 
 <body>
 
-    <header class="container-fluid text-white bg-dark">
+    <header class="container-fluid text-white bg-info">
         <h1 class="mb-0 p-4">Perfect Pet Placer <i class="fas fa-paw"></i></h1>
-        <button class="btn btn-primary mb-3" type="button" id="back-btn">Go back</button>
+        <button class="btn btn-secondary mb-3" type="button" id="back-btn">Go back</button>
     </header>
 
     <div class="container-fluid">
-
-        <div class="row m-3 p-2 justify-content-center">
-            <div class="col-lg-3 bg-light">
-                <h2 class="mt-1">Search Results</h2>
-                <div class="search mb-3">
-                    <input id="enter-pet" type="text" class="form-control" placeholder="Enter a pet"
-                        aria-label="Enter a pet">
-                    <div class="search-append">
-                        <button class="btn btn-primary" type="button" id="search-button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                    <div>
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
+        <div class="row m-3 p-2">
+            <div class="col-lg-3 p-3">
+                <div class="p-3">
+                    <h2 class="mt-1 text-center border border-info border-5 bg-info text-white ">Search Results</h2>
+                    <div class="card w-90">
+                        <img class=" petPhoto card-img-top" src="" alt="Card image cap">
+                        <div class="card-body">
+                            <h3 class=petName>Pet Name: </h3>
+                            <p class="breed">Pet Breed: </p>
+                            <p class="distanceFrom">Distance: </p>
                         </div>
-                        <!-- <div class="card">
-                            <div class="card-body">
-                                This is some text within a card body.
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                This is some text within a card body.
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                This is some text within a card body.
-                            </div>
-                        </div> -->
+                        <br>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-9">
-                <div class="row">
-                    <div class="col-lg-11 card m-3 d-none" id="card-results">
-                        <div class="card-body">
-                            This is some text within a card body.
+            <div class="col-lg-9 p-3">
+                <div class="p-3">
+                    <div class="row">
+                        <div class="card w-100">
+                            <div class="card-body">
+                                <img class="petPhoto" src="" alt="Pet Photo">
+                                <h3 class="petName">Pet Name: </h5>
+                                    <p class="breed">Pet Breed: </p>
+                                    <p class="age">Pet Age:</p>
+                                    <p class="distanceFrom">Distance:</p>
+                                    <p class="petBio">Pet Bio: </p>
+                                    <button id="modal-btn" class = "btn-secondary mb-3">Map It!:</button>
+                                    <div id="modal-container" class="modal">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <span class="close-modal">&times;</span>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>GOOGLE MAPS</p>
+                                                <div id = map></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            This is some text within a card body.
-                            <h5 class="card-title">Google Maps</h5>
-                            <p id="">text</p>
-                            <div id="map"></div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            This is some text within a card body.
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-9">
-            <div class="row">
-                <div class="col-lg-11 card mb-3 d-none" id="card-results">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-11 card m-3 d-none" id="google-maps">
-                    <div class="card-body">
-                        <h5 class="card-title">Google Maps</h5>
-                        <p id="map">text</p>
-                    </div>
-                </div>
-            </div>
-            
-            <button id="modal-btn">Open Modal</button>
-            
-            <div id="modal-container" class="modal">
-            
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <span class="close-modal">&times;</span>
-                    </div>
-                    <div class="modal-body">
-                        <p>GOOGLE MAPS</p>
-                    </div>
-                </div>
-            
-            </div>
-        </div>
-    </div>
     </div>
 
     <script async defer
