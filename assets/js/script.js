@@ -1,8 +1,8 @@
-var type ;
+var type;
 var age;
 var gender;
 var size;
-var coat;
+var coatLength;
 var address;
 var distance;
 
@@ -26,28 +26,92 @@ function fetchToken () {
     }).then(function(token) {
         return fetchPetAPI(token);
 
+function fetchPetAPI(token) {
+  //this fetch call will retrieve results for pet information based on user input
+  fetch("https://api.petfinder.com/v2/animals?type=" + type, {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + token.access_token,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  })
+    .then(function (resp) {
+      return resp.json();
     })
-}
-
-
-function fetchPetAPI (token) {
-
-    //this fetch call will retrieve results for pet information based on user input
-    fetch('https://api.petfinder.com/v2/animals?type=' + type, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer '+ token.access_token,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-    }).then(function (resp) {
-        return resp.json();
-
-    }).then(function (data) {
-        console.log('pets', data);
-
+    .then(function (data) {
+      console.log("pets", data);
     });
 }
 
+function searchHandler(event) {
+  event.preventDefault();
+
+  var type = document.getElementById("animalType").value;
+  console.log(type);
+  var gender = document.getElementById("animalGender").value;
+  console.log(gender);
+  var age = document.getElementById("animalAge").value;
+  console.log(age);
+  var size = document.getElementById("animalSize").value;
+  console.log(size);
+  var coatLength = document.getElementById("animalCoatLength").value;
+  console.log(coatLength);
+  var address = document.getElementById("address").value;
+  console.log(address);
+  var distance = document.getElementById("distance").value;
+  console.log(distance);
+
+  var form = {
+    // objects to hold input
+    animalType: type,
+    animalAge: age,
+    animalGender: gender,
+    animalSize: size,
+    animalCoatLength: coatLength,
+  };
+
+  addFormInfo(form); // function to add info to local storage
+
+  if (!type) {
+    console.error("Please select a type.");
+  }
+
+  if (!address) {
+    console.error("Please enter your location.");
+  }
+  console.log(form);
+  return form;
+
+  
+
+  //var querySearch = "./results.html?q+" + type + "&gender=" + gender + "&age=" + age + "&size=" + size + "&coatLength=" +
+  //coatLength + "&address=" + address + "&distance=" + distance;
+
+  //location.assign(querySearch);
+}
+
+
+
+// Local Storage
+
+// container with which to store
+var searchForm = document.getElementById("search-form");
+var formContainer = document.querySelector(".form-input");
+console.log(formContainer);
+
+
+// This function will take in the object form and it stores an object LocalStorage.
+var addFormInfo = function (UserInputForm) {
+    localStorage.setItem("form", JSON.stringify(UserInputForm));
+    console.log(localStorage);
+};
+
+
+
+// Go back button
+// document.querySelector('form').reset();     // clears form for next entry
+
+$("#submitBtn").click(searchHandler);
 var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
 var rescueAddress = "1309"+"Highland"+"Place"+"Faribault"+"MN";
 //This may need to be variables of "address1 + city + state" from the petfinder api
@@ -137,29 +201,6 @@ function backPage() {
     //in the future, maybe we can clear out local storage in this next line
 }
 
-// Local Storage 
-
-    // container with which to store
-    var searchForm = document.getElementById("search-form");
-    var formContainer = document.querySelector(".form-input");
-
-
-    //array to hold objects (not sure what name the array) add list from above
-    var form = {
-
-    // objects to hold input 
-        animalType: type,
-    };
-
-    // This function will take in the object form and it stores an object LocalStorage.
-    var addFormInfo = function(form){
-        // form.push(form);
-        localStorage.setItem("formInput", JSON.stringify(form));
-        console.log(localStorage);
-    }
-
-    // petsearch.api.com/age=form.animalAge&coattype=& 
-    // perform search through api using parameters from person searching 
 
     // Go back button
     // document.querySelector('form').reset();     // clears form for next entry
