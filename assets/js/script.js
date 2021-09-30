@@ -20,7 +20,7 @@ function fetchToken () {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
-    }).then(function(resp) {
+    }).then(function (resp) {
         return resp.json();
         
     }).then(function(token) {
@@ -75,7 +75,7 @@ function initMap(){
     }
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
     console.log(map);
-    };
+}
 
 function searchHandler(event){
     event.preventDefault();
@@ -94,8 +94,8 @@ function searchHandler(event){
     console.log(address)
     var distance = document.getElementById("distance").value;
     console.log(distance)
-
-    if(!type){
+    
+    if (!type) {
         console.error("Please select a type.")
     }
     
@@ -109,7 +109,6 @@ function searchHandler(event){
         //location.assign(querySearch);
         
     }
-
 
 // Local Storage 
 
