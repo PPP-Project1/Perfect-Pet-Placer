@@ -20,7 +20,7 @@ function fetchToken () {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
-    }).then(function(resp) {
+    }).then(function (resp) {
         return resp.json();
         
     }).then(function(token) {
@@ -48,6 +48,35 @@ function fetchPetAPI (token) {
     });
 }
 
+var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
+var rescueAddress = "1309"+"Highland"+"Place"+"Faribault"+"MN";
+//This may need to be variables of "address1 + city + state" from the petfinder api
+var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + rescueAddress + "&key=" + apiKey2;
+
+function fetchGoogleApi() {
+    fetch(geoURL)
+        .then(function (res) {
+            return res.json();
+        })
+        .then(function (data) {
+            console.log(data)
+        })
+}; 
+
+var lon1 = data.results.location.lng;
+console.log(lon1)
+var lat1 = data.results.location.lat;
+console.log(lat1)
+
+function initMap(){
+    var mapOptions= {
+        zoom:8,
+        center:{lat: -34.397, lng: 150.644},
+    }
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    console.log(map);
+    }
+
 function searchHandler(event){
     event.preventDefault();
     
@@ -65,8 +94,8 @@ function searchHandler(event){
     console.log(address)
     var distance = document.getElementById("distance").value;
     console.log(distance)
-
-    if(!type){
+    
+    if (!type) {
         console.error("Please select a type.")
     }
     
@@ -80,7 +109,6 @@ function searchHandler(event){
         //location.assign(querySearch);
         
     }
-
 
 // Local Storage 
 
