@@ -10,14 +10,29 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Ephesis&family=Kaushan+Script&family=Marck+Script&family=PT+Sans+Caption&family=Righteous&family=Yellowtail&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 </head>
 
 <body>
 
     <header class="container-fluid text-white bg-dark">
-        <h1 class="mb-0 p-4">Perfect Pet Placer</h1>
-        <button class="btn btn-primary mb-3" type="button" id="go-back">Go back</button>
+        <h1 class="mb-0 p-4">Perfect Pet Placer <i class="fas fa-paw"></i></h1>
+        <button class="btn btn-primary mb-3" type="button" id="back-btn">Go back</button>
     </header>
 
     <div class="container-fluid justify-content-around">
@@ -72,6 +87,42 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-lg-9">
+            <div class="row">
+                <div class="col-lg-11 card mb-3 d-none" id="card-results">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                      </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-11 card m-3 d-none" id="google-maps">
+                    <div class="card-body">
+                        <h5 class="card-title">Google Maps</h5>
+                        <p id="map">text</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="modal-btn">Open Modal</button>
+            
+            <div id="modal-container" class="modal">
+            
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close-modal">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <p>GOOGLE MAPS</p>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
     </div>
 
     <script async defer
