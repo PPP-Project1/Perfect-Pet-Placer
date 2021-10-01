@@ -86,40 +86,39 @@ function init2(){
     console.log(orgData);
 };
 
-// var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
-// var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2;
-// var orgAddress;
+var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
+var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2;
+var orgAddress;
 
-// function getAddress(petData, orgData){
-//     orgAddress = orgData.organization.address;
-//     if(petData.organization_id === orgData.organizations.id){
-//         return orgAddress;
-//     }
-// }
-// //Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
-// var lon1;
-// var lat1;
+function getAddress(petData, orgData){
+    orgAddress = orgData.organization.address;
+    if(petData.organization_id === orgData.organizations.id){
+        return orgAddress;
+    }
+}
+//Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
+var lon1;
+var lat1;
 
-// function fetchGoogleApi() {
-//     fetch(geoURL)
-//     .then(function (res) {
-//         return res.json();
-//     })
-//     .then(function (data) {
-//         console.log(data)
-//     })
-//   lon1 = data.results.location.lng;
-//     console.log(lon1)
-//   lat1 = data.results.location.lat;
-//     console.log(lat1)
-// }; 
-
+function fetchGoogleApi() {
+    fetch(geoURL)
+    .then(function (res) {
+        return res.json();
+    })
+    .then(function (data) {
+        console.log(data)
+    })
+  lon1 = data.results.location.lng;
+    console.log(lon1)
+  lat1 = data.results.location.lat;
+    console.log(lat1)
+}; 
 
 //Function to add the physical map to the modal
 function initMap(){
     var mapOptions= {
         zoom:8,
-        center:{lat: 44.29, lng: -93.26},
+        center:{lat: 44.2, lng: -93.4},
     }
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
     console.log(map);
