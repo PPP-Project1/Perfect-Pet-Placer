@@ -42,7 +42,8 @@ function fetchPetAPI(token) {
         })
         .then(function (petdata) {
             localStorage.setItem("petData", JSON.stringify(petdata));
-            console.log(petdata)
+            console.log(petdata);
+            return petdata.organization_id;
         });
 
     };
@@ -59,7 +60,8 @@ function fetchPetAPI(token) {
                 return resp.json();
             })
             .then(function (orgdata) {
-                console.log(orgdata)
+                console.log(orgdata);
+                return orgdata.organizations.id;
             });
     };
    
@@ -97,14 +99,12 @@ function searchHandler(event) {
     // location.assign(querySearch);
 }
 
-var petDataId = petdata.organization_id;
-var orgDataId = orgdata.organizations.id;
-var orgDataAddress = orgdata.orgnizations.address;
+
 
 function populateOrgMap(){
 
-if(petDataId === orgDataId){
-    return(orgDataAddress);
+if(petdata.organization_id === orgdata.organizaoins.id){
+    return(orgdata.organization.address);
 };
 }
 populateOrgMap();
