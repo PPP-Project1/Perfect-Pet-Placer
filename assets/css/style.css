@@ -1,6 +1,7 @@
 
 body{
     font-family: 'PT Sans Caption', sans-serif;
+    font-weight: bold;
     margin: 0;
     padding: 0;
 }
@@ -12,6 +13,10 @@ header{
     display: flex;
     align-items: center;
     justify-content:space-between;  
+}
+
+footer{
+    background: rgb(28, 165, 184);
 }
 
 /* Class selectors */
@@ -42,6 +47,7 @@ header{
     font-family:Arial, Helvetica, sans-serif;
     margin-right: 40px;
 }
+
 
 .modal {
     display: none;
