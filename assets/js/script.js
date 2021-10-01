@@ -70,14 +70,23 @@ function fetchGoogleApi() {
 // console.log(lat1)
 
 //Function to add the physical map to the modal
-function initMap(){
-    var mapOptions= {
+var map;
+var latLon ={lat:-34.39, lng: 150.64};
+
+// Map("#map");
+function initMap() {
+    var map = new google.maps.Map(
+        document.getElementById("map"),{
+        center:latLon,
         zoom:8,
-        center:{lat: -34.397, lng: 150.644},
-    }
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    console.log(map);
-}
+        mapTypeId: "roadmap",
+
+        })
+        console.log(map);
+};
+
+
+
 
 //Function to connect API varibales to the HTML elements associated with them as well as sending the user to the results page
 function searchHandler(event){

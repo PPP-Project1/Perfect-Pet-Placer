@@ -92,6 +92,10 @@ header{
   }
   
   .modal-body {padding: 2px 16px;}
+
+  #map {
+    height: 100%;
+  }
   
   
   @-webkit-keyframes slideIn {

@@ -66,6 +66,7 @@
                                     <p class="distanceFrom">Distance:</p>
                                     <p class="petBio">Pet Bio: </p>
                                     <button id="modal-btn" class = "btn-secondary mb-3">Map It!:</button>
+                                    <div id = "map"></div>
                                     <div id="modal-container" class="modal">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -73,7 +74,6 @@
                                             </div>
                                             <div class="modal-body">
                                                 <p>GOOGLE MAPS</p>
-                                                <div id = map></div>
                                             </div>
                                         </div>
                                     </div>
@@ -84,10 +84,7 @@
             </div>
         </div>
     </div>
-
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8&callback=initMap">;</script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8&callback=initMap&v=weekly" async ></script>
     <script src="./assets/js/script.js"></script>
 
 </body>
