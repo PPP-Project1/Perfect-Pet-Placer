@@ -1,6 +1,10 @@
 //carousel 
 $('.carousel').carousel({ interval: 2000 });
 
+var petId;
+var orgId;
+var orgAddress;
+
 function fetchToken () {
     //this fetch call retrieves access token for user to use for 1 hour
     fetch('https://api.petfinder.com/v2/oauth2/token', {
@@ -37,8 +41,28 @@ function fetchPetAPI(token) {
 
     }).then(function (data) {
         localStorage.setItem("petData", JSON.stringify(data));
+        console.log(data);
+
     })
-}
+};
+
+function fetchOrgAPI(token){
+    fetch("https://api.petfinder.com/v2/organizations",{
+        method: "GET",
+        headers: {
+            Authorization: "Bearer " + token.access_token,
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+    })
+        .then(function (resp) {
+            return resp.json();
+        })
+        .then(function (odata) {
+            localStorage.setItem("orgData", JSON.stringify(odata));
+            console.log(odata)
+
+        });
+};
 
 //function to connect API varibales to the HTML elements associated with them as well as sending the user to the results page
 function searchHandler() {
