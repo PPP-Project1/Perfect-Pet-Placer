@@ -1,7 +1,10 @@
 
 body{
+    background-color: whitesmoke;
     font-family: 'PT Sans Caption', sans-serif;
     font-weight: bold;
+    font-size: 16px;
+    line-height: 150%;
     margin: 0;
     padding: 0;
 }
@@ -28,7 +31,9 @@ footer{
 
 .card-title{
     font-family: 'Architects Daughter', cursive;
-    font-size: 30px;
+    font-size: 25px;
+    letter-spacing: -1px;
+    line-height: 100%;
 }
 
 
