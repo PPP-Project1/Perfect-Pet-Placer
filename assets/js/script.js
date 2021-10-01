@@ -40,9 +40,9 @@ function fetchPetAPI(token) {
         .then(function (resp) {
             return resp.json();
         })
-        .then(function (data) {
-            localStorage.setItem("petData", JSON.stringify(data));
-            console.log(data)
+        .then(function (petdata) {
+            localStorage.setItem("petData", JSON.stringify(petdata));
+            console.log(petdata)
         });
 
     };
@@ -58,15 +58,11 @@ function fetchPetAPI(token) {
             .then(function (resp) {
                 return resp.json();
             })
-            .then(function (data) {
-                console.log(data)
+            .then(function (orgdata) {
+                console.log(orgdata)
             });
     };
-    
-    
-    
-    
-    
+   
 
 //function to connect API varibales to the HTML elements associated with them as well as sending the user to the results page
 function searchHandler(event) {
@@ -101,36 +97,50 @@ function searchHandler(event) {
     // location.assign(querySearch);
 }
 
-// var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
-// var rescueAddress = "1309"+"Highland"+"Place"+"Faribault"+"MN";
-// //This may need to be variables of "address1 + city + state" from the petfinder api
-// var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + rescueAddress + "&key=" + apiKey2;
+var petDataId = petdata.organization_id;
+var orgDataId = orgdata.organizations.id;
+var orgDataAddress = orgdata.orgnizations.address;
 
-// //Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
-// function fetchGoogleApi() {
-//     fetch(geoURL)
-//         .then(function (res) {
-//             return res.json();
-//         })
-//         .then(function (data) {
-//             console.log(data)
-//         })
-// }; 
+function populateOrgMap(){
 
-// // var lon1 = data.results.location.lng;
-// // console.log(lon1)
-// // var lat1 = data.results.location.lat;
-// // console.log(lat1)
+if(petDataId === orgDataId){
+    return(orgDataAddress);
+};
+}
+populateOrgMap();
 
-// //Function to add the physical map to the modal
-// function initMap(){
-//     var mapOptions= {
-//         zoom:8,
-//         center:{lat: -34.397, lng: 150.644},
-//     }
-//     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-//     console.log(map);
-// }
+
+var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
+//This may need to be variables of "address1 + city + state" from the petfinder api
+var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + orgDataAddress + "&key=" + apiKey2;
+
+//Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
+function fetchGoogleApi() {
+    fetch(geoURL)
+        .then(function (res) {
+            return res.json();
+        })
+        .then(function (data) {
+            console.log(data)
+        })
+}; 
+fetchGoogleApi();
+
+var lon1 = data.results.location.lng;
+console.log(lon1)
+var lat1 = data.results.location.lat;
+console.log(lat1)
+
+//Function to add the physical map to the modal
+function initMap(){
+    var mapOptions= {
+        zoom:8,
+        center:{lat: lat1, lng: lon1},
+    }
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    console.log(map);
+}
+initMap();
 
 //modal
 function modal() {
