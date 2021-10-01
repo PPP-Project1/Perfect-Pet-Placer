@@ -39,9 +39,12 @@ function displayResults(petData) {
     resultsCard.append(resultCard);
 }
 
+
+
+
 function init() {
     var petData = JSON.parse(localStorage.getItem("petData"));
-
+    
     if (!petData) {
         resultsCard.innerHTML = "<h3> NO results found, go back and search again!</h3>";
     } else {
@@ -58,13 +61,13 @@ function init() {
 function modal() {
     var modalContainer = document.getElementById("modal-container");
     var closeModal = document.getElementsByClassName("close-modal")[0];
-
+    
     modalContainer.style.display = "block";
-
+    
     closeModal.onclick = function() {
         modalContainer.style.display = "none";
     }
-
+    
     window.onclick = function(event) {
         if (event.target == modalContainer) {
             modalContainer.style.display = "none";
@@ -78,35 +81,50 @@ function backPage() {
     location.assign("./index.html");
 }
 
+function init2(){
+    var orgData = JSON.parse(localStorage.getItem("orgData"))
+    console.log(orgData);
+};
 
 // var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
 // var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2;
+// var orgAddress;
 
+// function getAddress(petData, orgData){
+//     orgAddress = orgData.organization.address;
+//     if(petData.organization_id === orgData.organizations.id){
+//         return orgAddress;
+//     }
+// }
 // //Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
+// var lon1;
+// var lat1;
+
 // function fetchGoogleApi() {
 //     fetch(geoURL)
-//         .then(function (res) {
-//             return res.json();
-//         })
-//         .then(function (data) {
-//             console.log(data)
-//         })
+//     .then(function (res) {
+//         return res.json();
+//     })
+//     .then(function (data) {
+//         console.log(data)
+//     })
+//   lon1 = data.results.location.lng;
+//     console.log(lon1)
+//   lat1 = data.results.location.lat;
+//     console.log(lat1)
 // }; 
 
-// var lon1 = data.results.location.lng;
-// console.log(lon1)
-// var lat1 = data.results.location.lat;
-// console.log(lat1)
 
-// //Function to add the physical map to the modal
-// function initMap(){
-//     var mapOptions= {
-//         zoom:8,
-//         center:{lat: lat1, lng: lon1},
-//     }
-//     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-//     console.log(map);
-// }
+//Function to add the physical map to the modal
+function initMap(){
+    var mapOptions= {
+        zoom:8,
+        center:{lat: 44.29, lng: -93.26},
+    }
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    console.log(map);
+}
+
 
 init();
 
