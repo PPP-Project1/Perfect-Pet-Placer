@@ -38,6 +38,7 @@ function fetchPetAPI(token) {
         })
         .then(function (data) {
             localStorage.setItem("petData", JSON.stringify(data));
+            console.log(data)
         });
 }
 
@@ -69,9 +70,9 @@ function searchHandler(event) {
 
     fetchToken();
 
-    var querySearch = "./results.html";
+    // var querySearch = "./results.html";
 
-    location.assign(querySearch);
+    // location.assign(querySearch);
 }
 
 // var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
