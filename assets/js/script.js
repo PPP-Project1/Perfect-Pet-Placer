@@ -25,17 +25,27 @@ function fetchToken () {
 function fetchPetAPI(token) {
     var form = JSON.parse(localStorage.getItem("form"));
     var distance = parseInt(form.distance);
-    if (distance===5) {
+    if (distance === 5) {
         console.log("this is an integer 5");
     }
-    // this fetch call will retrieve results for pet information based on user input
-    fetch("https://api.petfinder.com/v2/animals?type=" + form.animalType + "&size=" + form.animalSize + "&gender=" + form.animalGender + "&age=" + form.animalAge + "&coat=" + form.animalCoat + "&location=" + form.location + "&distance=" + distance, {
-        method: "GET",
-        headers: {
-            Authorization: "Bearer " + token.access_token,
-            "Content-Type": "application/x-www-form-urlencoded",
+    Promise.all([
+        fetch("https://api.petfinder.com/v2/animals?type=" + form.animalType + "&size=" + form.animalSize + "&gender=" +
+            form.animalGender + "&age=" + form.animalAge + "&coat=" + form.animalCoat + "&location=" +
+            form.location + "&distance=" + distance), {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + token.access_token,
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
         },
-    })
+        fetch("https://api.petfinder.com/v2/orgainizations"), {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + token.access_token,
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+        }
+    ])
         .then(function (resp) {
             return resp.json();
         })
@@ -43,7 +53,7 @@ function fetchPetAPI(token) {
             localStorage.setItem("petData", JSON.stringify(data));
             console.log(data)
         });
-}
+};
 
 //function to connect API varibales to the HTML elements associated with them as well as sending the user to the results page
 function searchHandler(event) {
