@@ -1,10 +1,4 @@
-var type ;
-var age;
-var gender;
-var size;
-var coat;
-var address;
-var distance;
+let map;
 
 //carousel 
 $('.carousel').carousel({ interval: 2000 });
@@ -25,102 +19,91 @@ function fetchToken () {
         
     }).then(function(token) {
         return fetchPetAPI(token);
-
     })
 }
 
-
-function fetchPetAPI (token) {
-
-    //this fetch call will retrieve results for pet information based on user input
-    fetch('https://api.petfinder.com/v2/animals?type=' + type, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer '+ token.access_token,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-    }).then(function (resp) {
-        return resp.json();
-
-    }).then(function (data) {
-        console.log('pets', data);
-
-    });
-}
-
-var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
-var rescueAddress = "1309"+"Highland"+"Place"+"Faribault"+"MN";
-//This may need to be variables of "address1 + city + state" from the petfinder api
-var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + rescueAddress + "&key=" + apiKey2;
-
-//Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
-function fetchGoogleApi() {
-    fetch(geoURL)
-        .then(function (res) {
-            return res.json();
+function fetchPetAPI(token) {
+    var form = JSON.parse(localStorage.getItem("form"));
+    console.log(form);
+    // this fetch call will retrieve results for pet information based on user input
+    fetch("https://api.petfinder.com/v2/animals?type=" + form.animalType + "&size=" + form.animalSize + "&gender=" + form.animalGender + "&age=" + form.animalAge + "&coat=" + form.animalCoat + "&address=" + form.address + "&=distance" + form.distance, {
+        method: "GET",
+        headers: {
+            Authorization: "Bearer " + token.access_token,
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+    })
+        .then(function (resp) {
+            return resp.json();
         })
         .then(function (data) {
-            console.log(data)
-        })
-}; 
+            localStorage.setItem("petData", JSON.stringify(data));
+        });
+}
 
-// var lon1 = data.results.location.lng;
-// console.log(lon1)
-// var lat1 = data.results.location.lat;
-// console.log(lat1)
-
-//Function to add the physical map to the modal
-var map;
-var latLon ={lat:-34.39, lng: 150.64};
-
-// Map("#map");
-function initMap() {
-    var map = new google.maps.Map(
-        document.getElementById("map"),{
-        center:latLon,
-        zoom:8,
-        mapTypeId: "roadmap",
-
-        })
-        console.log(map);
-};
-
-
-
-
-//Function to connect API varibales to the HTML elements associated with them as well as sending the user to the results page
-function searchHandler(event){
+//function to connect API varibales to the HTML elements associated with them as well as sending the user to the results page
+function searchHandler(event) {
     event.preventDefault();
-    
-    var type = document.getElementById("animalType").value;
-    console.log(type)
-    var gender = document.getElementById("animalGender").value;
-    console.log(gender)
-    var age = document.getElementById("animalAge").value;
-    console.log(age)
-    var size = document.getElementById("animalSize").value;
-    console.log(size)
-    var coatLength = document.getElementById("animalCoatLength").value;
-    console.log(coatLength)
-    var address = document.getElementById("address").value;
-    console.log(address)
-    var distance = document.getElementById("distance").value;
-    console.log(distance)
-    
-    if (!type) {
-        console.error("Please select a type.")
+
+    var form = {
+        // objects to hold input
+        animalType: document.getElementById("animalType").value,
+        animalAge: document.getElementById("animalAge").value,
+        animalGender: document.getElementById("animalGender").value,
+        animalSize: document.getElementById("animalSize").value,
+        animalCoat: document.getElementById("animalCoat").value,
+        address: document.getElementById("address").value,
+        distance: document.getElementById("distance").value
+    };
+
+    //will take in the object form and it stores an object LocalStorage.
+    localStorage.setItem("form", JSON.stringify(form));
+
+    if (!form.animalType) {
+        console.error("Please select a type.");
     }
-    
-    if(!address){
-        console.error("Please enter your location.")
+
+    if (!form.address) {
+        console.error("Please enter your location.");
     }
-        
-        // var querySearch = "./results.html?q+" + type + "&gender=" + gender + "&age=" + age + "&size=" + size + "&coatLength=" + 
-        // coatLength + "&address=" + address + "&distance=" + distance;
-        
-        // location.assign(querySearch);
-        
-    }
+
+    fetchToken();
+
+    var querySearch = "./results.html";
+
+    location.assign(querySearch);
+}
+
+// var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
+// var rescueAddress = "1309"+"Highland"+"Place"+"Faribault"+"MN";
+// //This may need to be variables of "address1 + city + state" from the petfinder api
+// var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + rescueAddress + "&key=" + apiKey2;
+
+// //Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
+// function fetchGoogleApi() {
+//     fetch(geoURL)
+//         .then(function (res) {
+//             return res.json();
+//         })
+//         .then(function (data) {
+//             console.log(data)
+//         })
+// }; 
+
+// // var lon1 = data.results.location.lng;
+// // console.log(lon1)
+// // var lat1 = data.results.location.lat;
+// // console.log(lat1)
+
+// //Function to add the physical map to the modal
+// function initMap(){
+//     var mapOptions= {
+//         zoom:8,
+//         center:{lat: -34.397, lng: 150.644},
+//     }
+//     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+//     console.log(map);
+// }
 
 //modal
 function modal() {
@@ -146,34 +129,6 @@ function backPage() {
     //in the future, maybe we can clear out local storage in this next line
 }
 
-// Local Storage 
-
-    // container with which to store
-    var searchForm = document.getElementById("search-form");
-    var formContainer = document.querySelector(".form-input");
-
-
-    //array to hold objects (not sure what name the array) add list from above
-    var form = {
-
-    // objects to hold input 
-        animalType: type,
-    };
-
-    // This function will take in the object form and it stores an object LocalStorage.
-    var addFormInfo = function(form){
-        // form.push(form);
-        localStorage.setItem("formInput", JSON.stringify(form));
-        console.log(localStorage);
-    }
-
-    // petsearch.api.com/age=form.animalAge&coattype=& 
-    // perform search through api using parameters from person searching 
-
-    // Go back button
-    // document.querySelector('form').reset();     // clears form for next entry
-
-
 $("#submitBtn").click(searchHandler);
 $("#modal-btn").click(modal);
-$("#back-btn").click(backPage)
+$("#back-btn").click(backPage);
