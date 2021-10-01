@@ -24,9 +24,12 @@ function fetchToken () {
 
 function fetchPetAPI(token) {
     var form = JSON.parse(localStorage.getItem("form"));
-    console.log(form);
+    var distance = parseInt(form.distance);
+    if (distance===5) {
+        console.log("this is an integer 5");
+    }
     // this fetch call will retrieve results for pet information based on user input
-    fetch("https://api.petfinder.com/v2/animals?type=" + form.animalType + "&size=" + form.animalSize + "&gender=" + form.animalGender + "&age=" + form.animalAge + "&coat=" + form.animalCoat + "&address=" + form.address + "&=distance" + form.distance, {
+    fetch("https://api.petfinder.com/v2/animals?type=" + form.animalType + "&size=" + form.animalSize + "&gender=" + form.animalGender + "&age=" + form.animalAge + "&coat=" + form.animalCoat + "&location=" + form.location + "&distance=" + distance, {
         method: "GET",
         headers: {
             Authorization: "Bearer " + token.access_token,
@@ -53,7 +56,7 @@ function searchHandler(event) {
         animalGender: document.getElementById("animalGender").value,
         animalSize: document.getElementById("animalSize").value,
         animalCoat: document.getElementById("animalCoat").value,
-        address: document.getElementById("address").value,
+        location: document.getElementById("location").value,
         distance: document.getElementById("distance").value
     };
 
@@ -64,7 +67,7 @@ function searchHandler(event) {
         console.error("Please select a type.");
     }
 
-    if (!form.address) {
+    if (!form.location) {
         console.error("Please enter your location.");
     }
 
