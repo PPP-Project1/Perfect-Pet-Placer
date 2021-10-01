@@ -91,8 +91,9 @@ header{
     color: #fff;
   }
   
-  .modal-body {padding: 2px 16px;}
-  
+  .modal-body {
+    padding: 2px 16px;
+  }
   
   @-webkit-keyframes slideIn {
     from {bottom: -300px; opacity: 0} 
