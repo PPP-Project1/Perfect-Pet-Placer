@@ -13,7 +13,7 @@ function fetchToken () {
         return resp.json();
         
     }).then(function(token) {
-        return fetchPetAPI(token);
+        return Promise.all[fetchPetAPI(token),fetchOrgAPI(token)]
     })
 }
 
@@ -25,6 +25,7 @@ function fetchPetAPI(token) {
         var distance = parseInt(form.distance);
     }
     // this fetch call will retrieve results for pet information based on user input
+    
     fetch("https://api.petfinder.com/v2/animals?type=" + form.animalType + "&size=" + form.animalSize + "&gender=" + form.animalGender + "&age=" + form.animalAge + "&coat=" + form.animalCoat + "&location=" + form.location + "&distance=" + distance, {
         method: "GET",
         headers: {
@@ -36,8 +37,28 @@ function fetchPetAPI(token) {
 
     }).then(function (data) {
         localStorage.setItem("petData", JSON.stringify(data));
+        console.log(data);
+
     })
-}
+};
+
+function fetchOrgAPI(token){
+    fetch("https://api.petfinder.com/v2/organizations",{
+        method: "GET",
+        headers: {
+            Authorization: "Bearer " + token.access_token,
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+    })
+        .then(function (resp) {
+            return resp.json();
+        })
+        .then(function (data) {
+            localStorage.setItem("orgData", JSON.stringify(data));
+            console.log(data)
+
+        });
+};
 
 //function to connect API varibales to the HTML elements associated with them as well as sending the user to the results page
 function searchHandler() {

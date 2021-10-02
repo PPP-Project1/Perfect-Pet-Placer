@@ -104,11 +104,11 @@ function modal() {
 
     modalContainer.style.display = "block";
 
-    closeModal.onclick = function() {
+    closeModal.onclick = function () {
         modalContainer.style.display = "none";
     }
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modalContainer) {
             modalContainer.style.display = "none";
         }
@@ -121,36 +121,7 @@ function backPage() {
     location.assign("./index.html");
 }
 
-// var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
-// var rescueAddress = "1309"+"Highland"+"Place"+"Faribault"+"MN";
-// //This may need to be variables of "address1 + city + state" from the petfinder api
-// var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + rescueAddress + "&key=" + apiKey2;
 
-// //Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
-// function fetchGoogleApi() {
-//     fetch(geoURL)
-//         .then(function (res) {
-//             return res.json();
-//         })
-//         .then(function (data) {
-//             console.log(data)
-//         })
-// }; 
-
-// // var lon1 = data.results.location.lng;
-// // console.log(lon1)
-// // var lat1 = data.results.location.lat;
-// // console.log(lat1)
-
-// //Function to add the physical map to the modal
-// function initMap(){
-//     var mapOptions= {
-//         zoom:8,
-//         center:{lat: -34.397, lng: 150.644},
-//     }
-//     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-//     console.log(map);
-// }
 
 init();
 
