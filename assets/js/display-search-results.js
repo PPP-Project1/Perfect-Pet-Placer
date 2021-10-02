@@ -14,7 +14,7 @@ function displayMain(i) {
     mainBody.setAttribute("style", "width: 100%; height: 100%;");
     mainCard.append(mainBody);
 
-    if (!petData.photos) {
+    if (!petData.photos[0]) {
         var petImgMain = document.createElement("p");
         petImgMain.textContent = "Sorry, no images available."
     } else {
@@ -39,10 +39,6 @@ function displayMain(i) {
 
     var distance = document.createElement("p");
     distance.textContent = "Distance: " + petData.distance + " miles";
-
-    var map = document.createElement("div");
-    map.textContent = "This will be a map here.";
-    map.setAttribute = ("id", "map");
 
     mainBody.append(petImgMain, petNameMain, petBreedMain, petAgeMain, distance, map);
 
@@ -126,8 +122,16 @@ function backPage() {
     window.localStorage.clear();
     location.assign("./index.html");
 }
+var map;
 
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: -34.397, lng: 150.644 },
+    zoom: 10,
+  });
+}
 
+initMap();
 init();
 
 $(".display-main-btn").click(function() {
