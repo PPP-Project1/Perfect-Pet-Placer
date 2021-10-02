@@ -160,11 +160,12 @@ var map;
     function initMap() {
         var mapOptions = {
             zoom: 8,
-            center: { lat: parseInt(lat1), lng: parseInt(lon1)},
+            setCenter: { lat:lat1, lng:lon1},
         }
         var map = new google.maps.Map(document.getElementById("map"), mapOptions);
         console.log(map);
     };
+    initMap();
 
 
 
