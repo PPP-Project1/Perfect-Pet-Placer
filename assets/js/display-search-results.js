@@ -40,7 +40,7 @@ function displayMain(i) {
     var distance = document.createElement("p");
     distance.textContent = "Distance: " + petData.distance + " miles";
 
-    mainBody.append(petImgMain, petNameMain, petBreedMain, petAgeMain, distance, map);
+    mainBody.append(petImgMain, petNameMain, petBreedMain, petAgeMain, distance);
 
     mainContainer.append(mainCard);
 }
@@ -100,38 +100,54 @@ function init() {
 }
 
 //modal
-function modal() {
-    var modalContainer = document.getElementById("modal-container");
-    var closeModal = document.getElementsByClassName("close-modal")[0];
-
-    modalContainer.style.display = "block";
-
-    closeModal.onclick = function () {
-        modalContainer.style.display = "none";
-    }
-
-    window.onclick = function (event) {
-        if (event.target == modalContainer) {
-            modalContainer.style.display = "none";
-        }
-    }
-}
 
 //moves user back to landing page
 function backPage() {
     window.localStorage.clear();
     location.assign("./index.html");
 }
+
 var map;
+var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
+var orgAddress = "23 Doranne Ct Smyrna Ga";
+console.log(orgAddress);
+var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2;
+console.log(geoURL);
+
+// function getAddress(petData, orgData){
+//     orgAddress = orgData.organization.address;
+//     if(petData.organization_id === orgData.organizations.id){
+//         return orgAddress;
+//     }
+// }
+//Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
+
+function fetchGoogleApi() {
+    fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2)
+        .then(function (resp) {
+            return resp.json();
+        })
+        .then(function (googleData) {
+            localStorage.setItem("googleData", JSON.stringify(googleData));
+        });
+};
+
+fetchGoogleApi();
 
 function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
+    var data = JSON.parse(localStorage.getItem("googleData"));
+    console.log(data);
+
+    var lon1 = (data.results[0].geometry.location.lng);
+    var lat1 = (data.results[0].geometry.location.lat);
+
+    map = new google.maps.Map(document.getElementById("map"), {
+    center: {lat: lat1, lng: lon1},
     zoom: 10,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 }
 
-initMap();
 init();
 
 $(".display-main-btn").click(function() {
@@ -139,5 +155,4 @@ $(".display-main-btn").click(function() {
     $(mainContainer).children(0).remove();
     return displayMain(elmId);
 })
-$("#modal-btn").click(modal);
 $("#back-btn").click(backPage);
