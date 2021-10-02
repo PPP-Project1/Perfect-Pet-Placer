@@ -100,8 +100,8 @@ function initMap() {
     }
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
     console.log(map);
-}
-initMap();
+};
+
 //modal
 function modal() {
     var modalContainer = document.getElementById("modal-container");
