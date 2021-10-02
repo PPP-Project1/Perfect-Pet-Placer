@@ -121,6 +121,51 @@ function backPage() {
     location.assign("./index.html");
 }
 
+function init2() {
+    var orgData = JSON.parse(localStorage.getItem("orgData"))
+    console.log(orgData);
+};
+
+var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
+var orgAddress = "23 Doranne Ct Smyrna Ga";
+console.log(orgAddress);
+var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2;
+console.log(geoURL);
+
+// function getAddress(petData, orgData){
+//     orgAddress = orgData.organization.address;
+//     if(petData.organization_id === orgData.organizations.id){
+//         return orgAddress;
+//     }
+// }
+//Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
+var lon1;
+var lat1;
+function fetchGoogleApi() {
+    fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2)
+        .then(function (resp) {
+            return resp.json();
+        })
+        .then(function (data) {
+            console.log(data)
+            lon1 = (data.results[0].geometry.location.lng);
+            console.log(lon1)
+            lat1 =(data.results[0].geometry.location.lat);
+            console.log(lat1)
+        });
+    };
+    fetchGoogleApi();
+
+var map;
+    function initMap() {
+        var mapOptions = {
+            zoom: 8,
+            center: { lat: parseInt(lat1), lng: parseInt(lon1)},
+        }
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        console.log(map);
+    };
+
 
 
 init();
