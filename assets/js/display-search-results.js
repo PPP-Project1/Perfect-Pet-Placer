@@ -11,14 +11,16 @@ function displayMain(i) {
 
     var mainBody = document.createElement("div");
     mainBody.classList.add("card-body");
+    mainBody.setAttribute("style", "width: 100%; height: 100%;");
     mainCard.append(mainBody);
 
-    if (!petData.photos) {
+    if (!petData.photos[0]) {
         var petImgMain = document.createElement("p");
         petImgMain.textContent = "Sorry, no images available."
     } else {
         var petImgMain = document.createElement("img");
         petImgMain.setAttribute("src", petData.photos[0].full);
+        petImgMain.setAttribute("style", "max-width: 100%; max-height: 100%;");
     }
 
     var petNameMain = document.createElement("h3");
@@ -101,22 +103,6 @@ function init() {
 }
 
 //modal
-function modal() {
-    var modalContainer = document.getElementById("modal-container");
-    var closeModal = document.getElementsByClassName("close-modal")[0];
-
-    modalContainer.style.display = "block";
-
-    closeModal.onclick = function () {
-        modalContainer.style.display = "none";
-    }
-
-    window.onclick = function (event) {
-        if (event.target == modalContainer) {
-            modalContainer.style.display = "none";
-        }
-    }
-}
 
 //moves user back to landing page
 function backPage() {
@@ -131,6 +117,7 @@ console.log(orgAddress);
 var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2;
 console.log(geoURL);
 
+<<<<<<< HEAD
 function getAddress(allPetData, orgData){
     var orgData = JSON.parse(localStorage.getItem("orgData"));
     var allPetData = JSON.parse(localStorage.getItem("petData"));
@@ -140,6 +127,15 @@ function getAddress(allPetData, orgData){
     }
 }
 // Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
+=======
+// function getAddress(petData, orgData){
+//     orgAddress = orgData.organization.address;
+//     if(petData.organization_id === orgData.organizations.id){
+//         return orgAddress;
+//     }
+// }
+//Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
+>>>>>>> b0cc88c80c979af004cfb060e40aedb041e98fcc
 
 function fetchGoogleApi() {
     fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2)
@@ -156,6 +152,19 @@ fetchGoogleApi();
 function initMap() {
     var data = JSON.parse(localStorage.getItem("googleData"));
     console.log(data);
+<<<<<<< HEAD
+
+    var lon1 = (data.results[0].geometry.location.lng);
+    var lat1 = (data.results[0].geometry.location.lat);
+
+    map = new google.maps.Map(document.getElementById("map"), {
+    center: {lat: lat1, lng: lon1},
+    zoom: 10,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+}
+=======
+>>>>>>> b0cc88c80c979af004cfb060e40aedb041e98fcc
 
     var lon1 = (data.results[0].geometry.location.lng);
     var lat1 = (data.results[0].geometry.location.lat);
@@ -167,7 +176,6 @@ function initMap() {
   });
 }
 
-
 init();
 
 $(".display-main-btn").click(function () {
@@ -175,5 +183,4 @@ $(".display-main-btn").click(function () {
     $(mainContainer).children(0).remove();
     return displayMain(elmId);
 })
-$("#modal-btn").click(modal);
 $("#back-btn").click(backPage);

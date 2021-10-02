@@ -13,7 +13,7 @@ function fetchToken () {
         return resp.json();
         
     }).then(function(token) {
-        return Promise.all[fetchPetAPI(token),fetchOrgAPI(token)]
+        return Promise.all[fetchPetAPI(token),fetchOrgAPI(token)];
     })
 }
 
@@ -25,7 +25,6 @@ function fetchPetAPI(token) {
         var distance = parseInt(form.distance);
     }
     // this fetch call will retrieve results for pet information based on user input
-    
     fetch("https://api.petfinder.com/v2/animals?type=" + form.animalType + "&size=" + form.animalSize + "&gender=" + form.animalGender + "&age=" + form.animalAge + "&coat=" + form.animalCoat + "&location=" + form.location + "&distance=" + distance, {
         method: "GET",
         headers: {
@@ -34,11 +33,8 @@ function fetchPetAPI(token) {
         },
     }).then(function (resp) {
         return resp.json();
-
     }).then(function (data) {
         localStorage.setItem("petData", JSON.stringify(data));
-        console.log(data);
-
     })
 };
 
@@ -55,8 +51,6 @@ function fetchOrgAPI(token){
         })
         .then(function (data) {
             localStorage.setItem("orgData", JSON.stringify(data));
-            console.log(data)
-
         });
 };
 

@@ -1,6 +1,6 @@
 # Perfect-Pet-Placer
 
-Description
+## Description
 
 Perfect Pet Places is an application to find a pets that have been dislocated or pets that need to be adopted in the city or state where you live. There are an estimated 6.3 million animals that end up in animal shelters nationwide each year. Last year was an unprecedented year that brought a lot of uncertainty and extra time spent in our homes. This prompted a nationwide adoption spree wherein people began searching for solace in animals to help keep sane and stable during such a chaotic and stressful time. This also caused the  adoption rate for dogs and cats increase by 9%! This boom also slowed down euthanasia rates in shelters across the US because people were reportedly turning to animals for relief. Statics also showed that having an animal companion helped us ride the pandemic wave much better and it reduced symptoms of depression and anxiety.
 
@@ -10,25 +10,33 @@ That is why we created this app! We want people who can find time to give to the
 This app will allow you to select what type of animal you are searching for, whether it be a dog, cat, bird or rabbit. You will then select what age, gender, size, hair length, zip code you are searching in and the radius of your search. The search will show you the name and location of the animal and will allow you to get more information about the animal you are interested in. Once you have chosen your new animal, you can contact the owner and go pick up your animal! 
 
 The app was built using the following technologies:
-    HTML
-    CSS
-    Bootstrap
-    Javascript 
-    JQuery
-    Google Map API
-    Pet Finder API
 
-Purpose of the APP:
+* HTML
+* CSS
+* Bootstrap
+* Javascript 
+* JQuery
+* Google Map API
+* Pet Finder API
+
+## Purpose of the APP:
 
 1. User is able to search using PetFinder API the type of animal such as a dog, cat, bird or rabbit. They can select age, gender, size, hair length, zip code and radius of the search.
+
 2. Users search results will take them to a page with results for the information they selected. 
+
 3. There the user will be able to search through a list of animals and their locations.
+
 4. Once the user has chosen an option. The animal, their name, breed, age distance and a short bio will be displayed. 
+
 5. The user will also being to use the Google API map to determine the location of the animal so they can pick up their new furry friend.
+
 6. There are also options to learn more about other places that handle adoptions and care for animals that need a new home.
 
-Links:
+## Links:
+
 Deployed: https://github.com/PPP-Project1/Perfect-Pet-Placer
+
 Github repo: https://ppp-project1.github.io/Perfect-Pet-Placer/
-PowerPoint Presentation:
-https://docs.google.com/presentation/d/1Z0OX0Pc_s-GXmH-SMf7qGhcCQ4uRUQSVI8fJRHNKT9g/edit#slide=id.gf009468900_0_39
+
+PowerPoint Presentation: https://docs.google.com/presentation/d/1Z0OX0Pc_s-GXmH-SMf7qGhcCQ4uRUQSVI8fJRHNKT9g/edit#slide=id.gf009468900_0_39
