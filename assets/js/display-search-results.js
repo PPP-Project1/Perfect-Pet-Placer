@@ -8,6 +8,7 @@ function displayResults(petData) {
     var resultBody = document.createElement("div");
     resultBody.classList.add("card-body");
     resultCard.append(resultBody);
+    resultBody.setAttribute("style","padding: 30px 0 40px; margin-bottom: 30px; background-color: white; text-align: center; position: relative;")
 
     var petName = document.createElement("h3");
     petName.textContent = petData.name;
@@ -33,17 +34,18 @@ function displayResults(petData) {
     morePetData.classList.add("btn", "btn-primary");
     morePetData.setAttribute("type", "button");
     morePetData.setAttribute("id", petData.id);
+    morePetData.setAttribute("style", "margin-top: 10px; margin-left: 10px;")
 
     resultBody.append(petName, petBreed, petImg, morePetData);
 
-    resultsCard.append(resultCard);
+    resultsContainer.append(resultCard);
 }
 
 function init() {
     var petData = JSON.parse(localStorage.getItem("petData"));
 
     if (!petData) {
-        resultsCard.innerHTML = "<h3> NO results found, go back and search again!</h3>";
+        resultsContainer.innerHTML = "<h3> NO results found, go back and search again!</h3>";
     } else {
         for (var i = 0; i < petData.animals.length; i++) {
             if (i === 9) {
