@@ -42,6 +42,7 @@ function displayMain(i) {
 
     var organization = document.createElement("p");
     organization.textContent = "Organization Address: " + petData.contact.address.address1 +" " + petData.contact.address.city + ", " + petData.contact.address.state;
+    organization.setAttribute("id", "address");
 
     mainBody.append(petImgMain, petNameMain, petBreedMain, petAgeMain, distance,organization);
 
@@ -112,8 +113,8 @@ function backPage() {
 
 var map;
 var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
-var orgAddress;
-console.log(orgAddress);
+// var orgAddress;
+// console.log(orgAddress);
 var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2;
 console.log(geoURL);
 
@@ -125,10 +126,13 @@ console.log(geoURL);
 // }
 //Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
 
-function fetchGoogleApi() {
-    var petData = JSON.parse(localStorage.getItem("petData"));
-    var orgAddress = petData.contact.address.address1 + petData.contact.address.city + petData.contact.address.state;
-    fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2)
+function fetchGoogleApi(i) {
+    var allPetData = JSON.parse(localStorage.getItem("petData"));
+    var petData = allPetData.animals[i];
+    var orgAddress = petData.contact.address.address1;
+    var orgCity = petData.contact.address.city;
+    var orgState= petData.contact.address.state;
+    fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress+ orgCity+ orgState+ "&key=" + apiKey2)
         .then(function (resp) {
             return resp.json();
         })
