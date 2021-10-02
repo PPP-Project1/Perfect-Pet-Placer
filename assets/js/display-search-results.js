@@ -110,11 +110,11 @@ function modal() {
 
     modalContainer.style.display = "block";
 
-    closeModal.onclick = function() {
+    closeModal.onclick = function () {
         modalContainer.style.display = "none";
     }
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modalContainer) {
             modalContainer.style.display = "none";
         }
@@ -127,46 +127,6 @@ function backPage() {
     location.assign("./index.html");
 }
 
-// var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
-// var orgAddress = "23 Doranne Ct Smyrna Ga";
-// console.log(orgAddress);
-// var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2;
-// console.log(geoURL)
-
-// // function getAddress(petData, orgData){
-// //     orgAddress = orgData.organization.address;
-// //     if(petData.organization_id === orgData.organizations.id){
-// //         return orgAddress;
-// //     }
-// // }
-// //Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
-// var lon1=parseFloat();
-// var lat1= parseFloat();
-// function fetchGoogleApi() {
-//     fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2)
-//         .then(function (resp) {
-//             return resp.json();
-//         })
-//         .then(function (data) {
-//             console.log(data)
-//             lon1 = (data.results[0].geometry.location.lng);
-//             console.log(lon1)
-//             lat1 =(data.results[0].geometry.location.lat);
-//             console.log(lat1)
-//         });
-//     };
-//     fetchGoogleApi();
-    
-//     //Function to add the physical map to the modal
-//     var map;
-//     function initMap() {
-//         map = new google.maps.Map(document.getElementById("map"), {
-//             setCenter: { lat: lat1, lng: lon1 },
-//             zoom: 8,
-//             mapTypeId: "roadmap",
-//         });
-//     };
-//     initMap();
 
 init();
 
