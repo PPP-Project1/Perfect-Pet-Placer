@@ -117,17 +117,6 @@ console.log(orgAddress);
 var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2;
 console.log(geoURL);
 
-<<<<<<< HEAD
-function getAddress(allPetData, orgData){
-    var orgData = JSON.parse(localStorage.getItem("orgData"));
-    var allPetData = JSON.parse(localStorage.getItem("petData"));
-    orgAddress = orgData.organization[i].address;
-    if(allPetData.organization_id === orgData.organizations.id){
-        return orgAddress;
-    }
-}
-// Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
-=======
 // function getAddress(petData, orgData){
 //     orgAddress = orgData.organization.address;
 //     if(petData.organization_id === orgData.organizations.id){
@@ -135,9 +124,10 @@ function getAddress(allPetData, orgData){
 //     }
 // }
 //Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
->>>>>>> b0cc88c80c979af004cfb060e40aedb041e98fcc
 
 function fetchGoogleApi() {
+    var petData = JSON.parse(localStorage.getItem("petData"));
+    var orgAddress = petData.contact.address.address1 + petData.contact.address.city + petData.contact.address.state;
     fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2)
         .then(function (resp) {
             return resp.json();
@@ -152,19 +142,6 @@ fetchGoogleApi();
 function initMap() {
     var data = JSON.parse(localStorage.getItem("googleData"));
     console.log(data);
-<<<<<<< HEAD
-
-    var lon1 = (data.results[0].geometry.location.lng);
-    var lat1 = (data.results[0].geometry.location.lat);
-
-    map = new google.maps.Map(document.getElementById("map"), {
-    center: {lat: lat1, lng: lon1},
-    zoom: 10,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
-}
-=======
->>>>>>> b0cc88c80c979af004cfb060e40aedb041e98fcc
 
     var lon1 = (data.results[0].geometry.location.lng);
     var lat1 = (data.results[0].geometry.location.lat);
