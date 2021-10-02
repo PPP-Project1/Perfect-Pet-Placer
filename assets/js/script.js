@@ -1,10 +1,6 @@
 //carousel 
 $('.carousel').carousel({ interval: 2000 });
 
-var petId;
-var orgId;
-var orgAddress;
-
 function fetchToken () {
     //this fetch call retrieves access token for user to use for 1 hour
     fetch('https://api.petfinder.com/v2/oauth2/token', {
@@ -57,9 +53,9 @@ function fetchOrgAPI(token){
         .then(function (resp) {
             return resp.json();
         })
-        .then(function (odata) {
-            localStorage.setItem("orgData", JSON.stringify(odata));
-            console.log(odata)
+        .then(function (data) {
+            localStorage.setItem("orgData", JSON.stringify(data));
+            console.log(data)
 
         });
 };

@@ -75,8 +75,8 @@ console.log(geoURL)
 //     }
 // }
 //Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
-var lon1;
-var lat1;
+var lon1=parseFloat();
+var lat1= parseFloat();
 function fetchGoogleApi() {
     fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2)
         .then(function (resp) {
@@ -84,9 +84,9 @@ function fetchGoogleApi() {
         })
         .then(function (data) {
             console.log(data)
-            lon1 = data.results[0].geometry.location.lng;
+            lon1 = (data.results[0].geometry.location.lng);
             console.log(lon1)
-            lat1 = data.results[0].geometry.location.lat;
+            lat1 =(data.results[0].geometry.location.lat);
             console.log(lat1)
         });
     };
@@ -96,7 +96,7 @@ function fetchGoogleApi() {
 function initMap() {
     var mapOptions = {
         zoom: 8,
-        center: { lat: parseInt(lat1), lng: parseInt(lon1)},
+        center:{lat:lat1, lng:lon1},
     }
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
     console.log(map);
