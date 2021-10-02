@@ -11,14 +11,16 @@ function displayMain(i) {
 
     var mainBody = document.createElement("div");
     mainBody.classList.add("card-body");
+    mainBody.setAttribute("style", "width: 100%; height: 100%;");
     mainCard.append(mainBody);
 
-    if (!petData.photos) {
+    if (!petData.photos[0]) {
         var petImgMain = document.createElement("p");
         petImgMain.textContent = "Sorry, no images available."
     } else {
         var petImgMain = document.createElement("img");
         petImgMain.setAttribute("src", petData.photos[0].full);
+        petImgMain.setAttribute("style", "max-width: 100%; max-height: 100%;");
     }
 
     var petNameMain = document.createElement("h3");
@@ -32,11 +34,11 @@ function displayMain(i) {
         petBreedMain.textContent = "Breed: " + petData.breeds.primary + " " + petData.breeds.secondary;
     }
 
-     var petAgeMain = document.createElement("p");
-     petAgeMain.textContent = "Age: " + petData.age;
+    var petAgeMain = document.createElement("p");
+    petAgeMain.textContent = "Age: " + petData.age;
 
-     var distance = document.createElement("p");
-     distance.textContent = "Distance: " + petData.distance + " miles";
+    var distance = document.createElement("p");
+    distance.textContent = "Distance: " + petData.distance + " miles";
 
     mainBody.append(petImgMain, petNameMain, petBreedMain, petAgeMain, distance);
 
@@ -98,22 +100,6 @@ function init() {
 }
 
 //modal
-function modal() {
-    var modalContainer = document.getElementById("modal-container");
-    var closeModal = document.getElementsByClassName("close-modal")[0];
-
-    modalContainer.style.display = "block";
-
-    closeModal.onclick = function () {
-        modalContainer.style.display = "none";
-    }
-
-    window.onclick = function (event) {
-        if (event.target == modalContainer) {
-            modalContainer.style.display = "none";
-        }
-    }
-}
 
 //moves user back to landing page
 function backPage() {
@@ -121,11 +107,7 @@ function backPage() {
     location.assign("./index.html");
 }
 
-function init2() {
-    var orgData = JSON.parse(localStorage.getItem("orgData"))
-    console.log(orgData);
-};
-
+var map;
 var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
 var orgAddress = "23 Doranne Ct Smyrna Ga";
 console.log(orgAddress);
@@ -139,35 +121,32 @@ console.log(geoURL);
 //     }
 // }
 //Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
-var lon1;
-var lat1;
+
 function fetchGoogleApi() {
     fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2)
         .then(function (resp) {
             return resp.json();
         })
-        .then(function (data) {
-            console.log(data)
-            lon1 = (data.results[0].geometry.location.lng);
-            console.log(lon1)
-            lat1 =(data.results[0].geometry.location.lat);
-            console.log(lat1)
+        .then(function (googleData) {
+            localStorage.setItem("googleData", JSON.stringify(googleData));
         });
-    };
-    fetchGoogleApi();
+};
 
-var map;
-    function initMap() {
-        var mapOptions = {
-            zoom: 8,
-            setCenter: { lat:lat1, lng:lon1},
-        }
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-        console.log(map);
-    };
-    initMap();
+fetchGoogleApi();
 
+function initMap() {
+    var data = JSON.parse(localStorage.getItem("googleData"));
+    console.log(data);
 
+    var lon1 = (data.results[0].geometry.location.lng);
+    var lat1 = (data.results[0].geometry.location.lat);
+
+    map = new google.maps.Map(document.getElementById("map"), {
+    center: {lat: lat1, lng: lon1},
+    zoom: 10,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+}
 
 init();
 
@@ -176,5 +155,4 @@ $(".display-main-btn").click(function() {
     $(mainContainer).children(0).remove();
     return displayMain(elmId);
 })
-$("#modal-btn").click(modal);
 $("#back-btn").click(backPage);

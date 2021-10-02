@@ -13,11 +13,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Ephesis&family=Kaushan+Script&family=Marck+Script&family=PT+Sans+Caption&family=Righteous&family=Yellowtail&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8&callback=initMap&v=weekly" async></script>
 </head>
 
 <body>
@@ -40,19 +40,7 @@
                     <div class="row">
                         <div class="main-container w-100">
                         </div>
-                        <div class="modal">
-                            <button id="modal-btn" class="btn-secondary mb-3">Map It!</button>
-                            <div id="modal-container" class="modal">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <span class="close-modal">&times;</span>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div id="map" style="width: 600px; height: 400px;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div id="map" style="width: 1200px; height: 1200px;"></div>
                     </div>
                 </div>
             </div>
@@ -61,6 +49,7 @@
     
     <script src="./assets/js/display-search-results.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8&v=3.exp&callback=initMap" async></script>
 </body>
 
 </html>
