@@ -9,7 +9,7 @@ function fetchGoogleApi(orgData) {
     if (!orgData.address.address1) {
         var address = orgData.address.city + " " + orgData.address.state;
     } else {
-        var address = orgData.address.address1 + " " + orgData.address.city + " " + orgData.address.state;  
+        var address = orgData.address.address1 + " " + orgData.address.city + " " + orgData.address.state;
     }
     orgAddresses.push(address);
 
@@ -20,7 +20,7 @@ function fetchGoogleApi(orgData) {
         .then(function (data) {
             var latLng = data.results[0].geometry.location;
             locations.push(latLng);
-    });
+        });
 };
 
 function displayMain(i) {
@@ -69,9 +69,64 @@ function displayMain(i) {
     organization.textContent = petData.contact.address.address1 + " " + petData.contact.address.city + " " + petData.contact.address.state;
     organization.setAttribute("id", "address");
 
-    mainBody.append(petImgMain, petNameMain, petBreedMain, petAgeMain, distance, organization, bio);
+    var modalBtn = document.createElement("button");
+    modalBtn.classList.add("btn btn-block custom-btn");
+    modalBtn.setAttribute("type", "button");
+    modalBtn.setAttribute("data-toggle", "modal");
+    modalBtn.setAttribute("data-target", "contact-modal");
+    modalBtn.textContent = "Organization Contact Information";
+
+    mainBody.append(petImgMain, petNameMain, petBreedMain, petAgeMain, distance, organization, bio, modalBtn);
 
     mainContainer.append(mainCard);
+
+    var orgData = JSON.parse(localStorage.getItem("orgData"));
+    var allOrgData = orgData.organizations[i]
+
+    var modalContainer = document.createElement("div")
+    modalContainer.classList.add("modal fade custom-modal");
+    modalContainer.setAttribute("id", "contact-modal")
+    modalContainer.setAttribute("tabindex", "-1")
+    modalContainer.setAttribute("role", "dialog")
+
+    var modalStyle = document.createElement('div');
+    modalStyle.classList.add("modal-dialog modal-lg modal-dialog-centered")
+
+    var modalContent = document.createElement("div");
+    modalContent.classList.add("modal-content");
+
+    var modalHeader = document.createElement("div");
+    modalHeader.classList.add("modal-header");
+
+    var headerText = document.createElement("h3");
+    headerText.textContent = "Organization Contact Info";
+
+    var orgName = document.createElement("p")
+    orgName.textContent = "Organization Name" + allOrgData.name
+
+    var orgWeb = document.createElement("p");
+    orgWeb.textContent = "Website: " + allOrgData.url
+
+    var orgEmail = document.createElement("p");
+    orgEmail.textContent = "Email: " + allOrgData.email
+
+    var orgPhone = document.createElement("p");
+    orgPhone.textContent = "Phone Number: " + allOrgData.Phone
+
+    var modalFooter = document.createElement("div");
+    modalFooter.classList.add("modal-footer");
+
+    var closeBtn = document.createElement("button");
+    closeBtn.classList.add("btn btn-secondary");
+    closeBtn.setAttribute("type", "button")
+    closeBtn.setAttribute("data-dismiss", "modal")
+    closeBtn.textContent = "Close";
+
+    modalHeader.append(headerText);
+    modalFooter.append(closeBtn);
+    modalContent.append(modalHeader, orgName, orgWeb, orgEmail, orgPhone, modalFooter);
+    modalStyle.append(modalContent);
+    modalContainer.append(modalStyle);
 }
 
 function displayResults(petData, i) {
@@ -116,12 +171,28 @@ function displayResults(petData, i) {
 
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: -34.397, lng: 150.644 },
-      zoom: 8,
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
     });
-  }
+}
 
-  function init() {
+function fetchToken() {
+    //this fetch call retrieves access token for user to use for 1 hour
+    fetch('https://api.petfinder.com/v2/oauth2/token', {
+        method: 'POST',
+        body: 'grant_type=client_credentials&client_id=iwfBo0lysmRDywH7YnUK8MqtITZWVbmzDeYpUuFE5cIJhzelM7&client_secret=oH97v5MQBen8II1y33uDrSab6xa8NRxhDwpmx9lS',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }).then(function (resp) {
+        return resp.json();
+
+    }).then(function (token) {
+        return fetchOrgAPI(token);
+    })
+}
+
+function init() {
     var petData = JSON.parse(localStorage.getItem("petData"));
     var orgData = JSON.parse(localStorage.getItem("orgData"));
 
@@ -137,24 +208,7 @@ function initMap() {
     }
 }
 
-function fetchToken () {
-    //this fetch call retrieves access token for user to use for 1 hour
-    fetch('https://api.petfinder.com/v2/oauth2/token', {
-        method: 'POST',
-        body: 'grant_type=client_credentials&client_id=iwfBo0lysmRDywH7YnUK8MqtITZWVbmzDeYpUuFE5cIJhzelM7&client_secret=oH97v5MQBen8II1y33uDrSab6xa8NRxhDwpmx9lS',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    }).then(function (resp) {
-        return resp.json();
-        
-    }).then(function(token) {
-        return fetchOrgAPI(token);
-    })
-}
-
-
-function fetchOrgAPI(token){
+function fetchOrgAPI(token) {
     var petData = JSON.parse(localStorage.getItem("petData"));
     var orgData = JSON.parse(localStorage.getItem("orgData"));
     if (!orgData) {
@@ -165,7 +219,7 @@ function fetchOrgAPI(token){
         console.log(petData);
         var orgId = petData.animals[i].organization_id;
 
-        fetch("https://api.petfinder.com/v2/organizations/" + orgId,{
+        fetch("https://api.petfinder.com/v2/organizations/" + orgId, {
             method: "GET",
             headers: {
                 Authorization: "Bearer " + token.access_token,
@@ -181,7 +235,7 @@ function fetchOrgAPI(token){
                     var orgData = [];
                 }
                 orgData.push(data);
-                localStorage.setItem("orgData",JSON.stringify(orgData));
+                localStorage.setItem("orgData", JSON.stringify(orgData));
             });
     }
     init();
