@@ -21,6 +21,8 @@ function fetchPetAPI(token) {
     var form = JSON.parse(localStorage.getItem("form"));
     if (!form.distance) {
         var distance = 100;
+    } else if (form.distance > 500) {
+        var distance = 100;
     } else {
         var distance = parseInt(form.distance);
     }

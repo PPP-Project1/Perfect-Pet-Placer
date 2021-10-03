@@ -20,7 +20,7 @@ function displayMain(i) {
     } else {
         var petImgMain = document.createElement("img");
         petImgMain.setAttribute("src", petData.photos[0].full);
-        petImgMain.setAttribute("style", "max-width: 100%; max-height: 100%;");
+        petImgMain.setAttribute("style", "height: 500px; max-width: 100%; max-height: 100%; display: block; margin-left: auto; margin-right: auto;");
     }
 
     var petNameMain = document.createElement("h3");
@@ -52,7 +52,6 @@ function displayMain(i) {
     mainContainer.append(mainCard);
 
     //Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
-
     function fetchGoogleApi() {
         fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + organization.textContent + "&key=" + apiKey2)
             .then(function (resp) {
@@ -64,21 +63,6 @@ function displayMain(i) {
     };
 
     fetchGoogleApi();
-
-    function initMap() {
-        var data = JSON.parse(localStorage.getItem("googleData"));
-        console.log(data);
-
-        var lon1 = (data.results[0].geometry.location.lng);
-        var lat1 = (data.results[0].geometry.location.lat);
-
-        map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: lat1, lng: lon1 },
-            zoom: 10,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
-    }
-    initMap();
 }
 
 function displayResults(petData, i) {
@@ -108,6 +92,7 @@ function displayResults(petData, i) {
     } else {
         var petImg = document.createElement("img");
         petImg.setAttribute("src", petData.photos[0].small);
+        petImg.setAttribute("style", "height: 100px; width: 100px; margin-bottom: 15px;")
     }
 
     var morePetData = document.createElement("button");
@@ -115,9 +100,28 @@ function displayResults(petData, i) {
     morePetData.classList.add("btn", "btn-primary", "display-main-btn");
     morePetData.setAttribute("type", "button");
 
-    resultBody.append(petName, petBreed, petImg, morePetData);
+    resultBody.append(petName, petImg, petBreed, morePetData);
 
     resultsContainer.append(resultCard);
+}
+
+function initMap() {
+    var data = JSON.parse(localStorage.getItem("googleData"));
+    console.log(data);
+
+    if (!data) {
+        var lon1 = -84;
+        var lat1 = 35;
+    } else {
+        var lon1 = (data.results[0].geometry.location.lng);
+        var lat1 = (data.results[0].geometry.location.lat);
+    }
+
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: lat1, lng: lon1 },
+        zoom: 11,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
 }
 
 function init() {
