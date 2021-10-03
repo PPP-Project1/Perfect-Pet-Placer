@@ -14,6 +14,7 @@ function displayMain(i) {
     mainBody.setAttribute("style", "width: 100%; height: 100%;");
     mainCard.append(mainBody);
 
+
     if (!petData.photos[0]) {
         var petImgMain = document.createElement("p");
         petImgMain.textContent = "Sorry, no images available."
@@ -47,7 +48,7 @@ function displayMain(i) {
     organization.textContent = petData.contact.address.address1 + " " + petData.contact.address.city + " " + petData.contact.address.state;
     organization.setAttribute("id", "address");
 
-    mainBody.append(petImgMain, petNameMain, petBreedMain, petAgeMain, distance, organization, bio);
+    mainBody.append(petImgMain, petNameMain, petBreedMain, petAgeMain, distance, organization, bio,);
 
     mainContainer.append(mainCard);
 
@@ -136,6 +137,7 @@ function init() {
 }
 
 //modal
+
 
 //moves user back to landing page
 function backPage() {
