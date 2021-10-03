@@ -1,5 +1,27 @@
 var resultsContainer = document.querySelector(".results-container");
 var mainContainer = document.querySelector(".main-container");
+var orgAddresses = [];
+var locations = [];
+var map;
+
+//call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
+function fetchGoogleApi(orgData) {
+    if (!orgData.organization.address.address1) {
+        var address = orgData.organization.address.city + " " + orgData.organization.address.state;
+    } else {
+        var address = orgData.organization.address.address1 + " " + orgData.organization.address.city + " " + orgData.organization.address.state;
+    }
+    orgAddresses.push(address);
+
+    fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8")
+        .then(function (resp) {
+            return resp.json();
+        })
+        .then(function (data) {
+            var latLng = data.results[0].geometry.location;
+            locations.push(latLng);
+    });
+};
 
 function displayMain(i) {
     var allPetData = JSON.parse(localStorage.getItem("petData"));
@@ -21,7 +43,7 @@ function displayMain(i) {
     } else {
         var petImgMain = document.createElement("img");
         petImgMain.setAttribute("src", petData.photos[0].full);
-        petImgMain.setAttribute("style", "max-width: 100%; max-height: 100%;");
+        petImgMain.setAttribute("style", "height: 500px; max-width: 100%; max-height: 100%; display: block; margin-left: auto; margin-right: auto;");
     }
 
     var petNameMain = document.createElement("h3");
@@ -51,35 +73,6 @@ function displayMain(i) {
     mainBody.append(petImgMain, petNameMain, petBreedMain, petAgeMain, distance, organization, bio,);
 
     mainContainer.append(mainCard);
-
-    //Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
-
-    function fetchGoogleApi() {
-        fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + organization.textContent + "&key=" + apiKey2)
-            .then(function (resp) {
-                return resp.json();
-            })
-            .then(function (googleData) {
-                localStorage.setItem("googleData", JSON.stringify(googleData));
-            });
-    };
-
-    fetchGoogleApi();
-
-    function initMap() {
-        var data = JSON.parse(localStorage.getItem("googleData"));
-        console.log(data);
-
-        var lon1 = (data.results[0].geometry.location.lng);
-        var lat1 = (data.results[0].geometry.location.lat);
-
-        map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: lat1, lng: lon1 },
-            zoom: 10,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
-    }
-    initMap();
 }
 
 function displayResults(petData, i) {
@@ -109,6 +102,7 @@ function displayResults(petData, i) {
     } else {
         var petImg = document.createElement("img");
         petImg.setAttribute("src", petData.photos[0].small);
+        petImg.setAttribute("style", "height: 100px; width: 100px; margin-bottom: 15px;")
     }
 
     var morePetData = document.createElement("button");
@@ -116,22 +110,76 @@ function displayResults(petData, i) {
     morePetData.classList.add("btn", "btn-primary", "display-main-btn");
     morePetData.setAttribute("type", "button");
 
-    resultBody.append(petName, petBreed, petImg, morePetData);
+    resultBody.append(petName, petImg, petBreed, morePetData);
 
     resultsContainer.append(resultCard);
 }
 
+function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: -34.397, lng: 150.644 },
+      zoom: 8,
+    });
+  }
+
+function fetchToken () {
+    //this fetch call retrieves access token for user to use for 1 hour
+    fetch('https://api.petfinder.com/v2/oauth2/token', {
+        method: 'POST',
+        body: 'grant_type=client_credentials&client_id=iwfBo0lysmRDywH7YnUK8MqtITZWVbmzDeYpUuFE5cIJhzelM7&client_secret=oH97v5MQBen8II1y33uDrSab6xa8NRxhDwpmx9lS',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }).then(function (resp) {
+        return resp.json();
+        
+    }).then(function(token) {
+        return fetchOrgAPI(token);
+    })
+}
+
+
+function fetchOrgAPI(token){
+    var petData = JSON.parse(localStorage.getItem("petData"));
+    var orgData = JSON.parse(localStorage.getItem("orgData"));
+    if (!orgData) {
+        var orgData = [];
+    }
+
+    for (var i = 0; i < 9; i++) {
+        var orgId = petData.animals[i].organization_id;
+
+        fetch("https://api.petfinder.com/v2/organizations/" + orgId,{
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + token.access_token,
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+        })
+            .then(function (resp) {
+                return resp.json();
+            })
+            .then(function (data) {
+                var orgData = JSON.parse(localStorage.getItem("orgData"));
+                if (orgData == null) {
+                    var orgData = [];
+                }
+                orgData.push(data);
+                localStorage.setItem("orgData",JSON.stringify(orgData));
+            });
+    }
+};
+
 function init() {
     var petData = JSON.parse(localStorage.getItem("petData"));
+    var orgData = JSON.parse(localStorage.getItem("orgData"));
 
     if (!petData) {
         resultsContainer.innerHTML = "<h3> NO results found, go back and search again!</h3>";
     } else {
-        for (var i = 0; i < petData.animals.length; i++) {
-            if (i === 9) {
-                return;
-            }
+        for (var i = 0; i < 9; i++) {
             displayResults(petData.animals[i], i);
+            fetchGoogleApi(orgData[i]);
         }
     }
 }
@@ -145,9 +193,7 @@ function backPage() {
     location.assign("./index.html");
 }
 
-var map;
-var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
-
+fetchToken();
 init();
 
 //When this button is clicked it should fetch the google api url and the map should initiate

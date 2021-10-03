@@ -13,7 +13,7 @@ function fetchToken () {
         return resp.json();
         
     }).then(function(token) {
-        return Promise.all[fetchPetAPI(token),fetchOrgAPI(token)];
+        return fetchPetAPI(token);
     })
 }
 
@@ -21,11 +21,13 @@ function fetchPetAPI(token) {
     var form = JSON.parse(localStorage.getItem("form"));
     if (!form.distance) {
         var distance = 100;
+    } else if (form.distance > 500) {
+        var distance = 100;
     } else {
         var distance = parseInt(form.distance);
     }
     // this fetch call will retrieve results for pet information based on user input
-    fetch("https://api.petfinder.com/v2/animals?type=" + form.animalType + "&size=" + form.animalSize + "&gender=" + form.animalGender + "&age=" + form.animalAge + "&coat=" + form.animalCoat + "&location=" + form.location + "&distance=" + distance, {
+    fetch("https://api.petfinder.com/v2/animals?type=" + form.animalType + "&size=" + form.animalSize + "&gender=" + form.animalGender + "&age=" + form.animalAge + "&coat=" + form.animalCoat + "&location=" + form.location + "&distance=" + distance + "&sort=distance", {
         method: "GET",
         headers: {
             Authorization: "Bearer " + token.access_token,
@@ -36,22 +38,6 @@ function fetchPetAPI(token) {
     }).then(function (data) {
         localStorage.setItem("petData", JSON.stringify(data));
     })
-};
-
-function fetchOrgAPI(token){
-    fetch("https://api.petfinder.com/v2/organizations",{
-        method: "GET",
-        headers: {
-            Authorization: "Bearer " + token.access_token,
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-    })
-        .then(function (resp) {
-            return resp.json();
-        })
-        .then(function (data) {
-            localStorage.setItem("orgData", JSON.stringify(data));
-        });
 };
 
 //function to connect API varibales to the HTML elements associated with them as well as sending the user to the results page
