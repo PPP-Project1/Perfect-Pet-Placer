@@ -66,7 +66,7 @@ function searchHandler() {
 
     fetchToken();
 
-    setTimeout(function(){ window.location.href = './results.html';}, 3000);
+    // setTimeout(function(){ window.location.href = './results.html';}, 3000);
 }
 
 $("#submitBtn").click(searchHandler);

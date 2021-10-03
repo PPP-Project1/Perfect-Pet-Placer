@@ -6,10 +6,10 @@ var map;
 
 //call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
 function fetchGoogleApi(orgData) {
-    if (!orgData.organization.address.address1) {
-        var address = orgData.organization.address.city + " " + orgData.organization.address.state;
+    if (!orgData.address.address1) {
+        var address = orgData.address.city + " " + orgData.address.state;
     } else {
-        var address = orgData.organization.address.address1 + " " + orgData.organization.address.city + " " + orgData.organization.address.state;
+        var address = orgData.address.address1 + " " + orgData.address.city + " " + orgData.address.state;  
     }
     orgAddresses.push(address);
 
@@ -121,6 +121,22 @@ function initMap() {
     });
   }
 
+  function init() {
+    var petData = JSON.parse(localStorage.getItem("petData"));
+    var orgData = JSON.parse(localStorage.getItem("orgData"));
+
+    if (!petData) {
+        resultsContainer.innerHTML = "<h3> NO results found, go back and search again!</h3>";
+    } else {
+        for (var i = 0; i < 9; i++) {
+            displayResults(petData.animals[i], i);
+        }
+    }
+    for (var i = 0; i < 9; i++) {
+        fetchGoogleApi(orgData[i].organization);
+    }
+}
+
 function fetchToken () {
     //this fetch call retrieves access token for user to use for 1 hour
     fetch('https://api.petfinder.com/v2/oauth2/token', {
@@ -146,6 +162,7 @@ function fetchOrgAPI(token){
     }
 
     for (var i = 0; i < 9; i++) {
+        console.log(petData);
         var orgId = petData.animals[i].organization_id;
 
         fetch("https://api.petfinder.com/v2/organizations/" + orgId,{
@@ -167,21 +184,8 @@ function fetchOrgAPI(token){
                 localStorage.setItem("orgData",JSON.stringify(orgData));
             });
     }
+    init();
 };
-
-function init() {
-    var petData = JSON.parse(localStorage.getItem("petData"));
-    var orgData = JSON.parse(localStorage.getItem("orgData"));
-
-    if (!petData) {
-        resultsContainer.innerHTML = "<h3> NO results found, go back and search again!</h3>";
-    } else {
-        for (var i = 0; i < 9; i++) {
-            displayResults(petData.animals[i], i);
-            fetchGoogleApi(orgData[i]);
-        }
-    }
-}
 
 //modal
 
@@ -192,13 +196,11 @@ function backPage() {
 }
 
 fetchToken();
-init();
 
 //When this button is clicked it should fetch the google api url and the map should initiate
 $(".display-main-btn").click(function () {
     var elmId = $(this).parent().attr("id");
     $(mainContainer).children(0).remove();
     return displayMain(elmId);
-
 })
 $("#back-btn").click(backPage);
