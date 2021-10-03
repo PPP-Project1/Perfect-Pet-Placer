@@ -1,8 +1,10 @@
 var resultsContainer = document.querySelector(".results-container");
 var mainContainer = document.querySelector(".main-container");
-var orgAddresses = [];
-var locations = [];
+var orgData = [];
 var map;
+var marker;
+var latLng;
+// var markerCluster;
 
 //call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
 function fetchGoogleApi(orgData) {
@@ -11,15 +13,13 @@ function fetchGoogleApi(orgData) {
     } else {
         var address = orgData.address.address1 + " " + orgData.address.city + " " + orgData.address.state;
     }
-    orgAddresses.push(address);
 
     fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8")
         .then(function (resp) {
             return resp.json();
         })
         .then(function (data) {
-            var latLng = data.results[0].geometry.location;
-            locations.push(latLng);
+            latLng = data.results[0].geometry.location;
         });
 };
 
@@ -127,6 +127,9 @@ function displayMain(i) {
     modalContent.append(modalHeader, orgName, orgWeb, orgEmail, orgPhone, modalFooter);
     modalStyle.append(modalContent);
     modalContainer.append(modalStyle);
+
+    fetchGoogleApi(orgData[i]);
+    console.log(orgData[i]);
 }
 
 function displayResults(petData, i) {
@@ -169,11 +172,42 @@ function displayResults(petData, i) {
     resultsContainer.append(resultCard);
 }
 
+// function initMap() {
+//     map = new google.maps.Map(document.getElementById("map"), {
+//       zoom: 3,
+//       center: { lat: -28.024, lng: 140.887 },
+//     });
+//     markers = locations.map((location, i) => {
+//       return new google.maps.Marker({
+//         position: location,
+//         label: labels[i % labels.length],
+//       });
+//     });
+  
+//     markerCluster = new markerCluster.MarkerClusterer({ map, markers });
+//   }
+
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8,
+        zoom: 10,
+        center: { lat: 33.753746, lng: -84.386330},
     });
+    marker = new google.maps.Marker({
+        position: { lat: 33.753746, lng: -84.386330},
+        map: map,
+    });
+}
+
+function init() {
+    var petData = JSON.parse(localStorage.getItem("petData"));
+
+    if (!petData) {
+        resultsContainer.innerHTML = "<h3> NO results found, go back and search again!</h3>";
+    } else {
+        for (var i = 0; i < 9; i++) {
+            displayResults(petData.animals[i], i);
+        }
+    }
 }
 
 function fetchToken() {
@@ -192,31 +226,11 @@ function fetchToken() {
     })
 }
 
-function init() {
-    var petData = JSON.parse(localStorage.getItem("petData"));
-    var orgData = JSON.parse(localStorage.getItem("orgData"));
-
-    if (!petData) {
-        resultsContainer.innerHTML = "<h3> NO results found, go back and search again!</h3>";
-    } else {
-        for (var i = 0; i < 9; i++) {
-            displayResults(petData.animals[i], i);
-        }
-    }
-    for (var i = 0; i < 9; i++) {
-        fetchGoogleApi(orgData[i].organization);
-    }
-}
-
 function fetchOrgAPI(token) {
     var petData = JSON.parse(localStorage.getItem("petData"));
-    var orgData = JSON.parse(localStorage.getItem("orgData"));
-    if (!orgData) {
-        var orgData = [];
-    }
 
     for (var i = 0; i < 9; i++) {
-        console.log(petData);
+        //for loop that grabs petdata organization from each point of index
         var orgId = petData.animals[i].organization_id;
 
         fetch("https://api.petfinder.com/v2/organizations/" + orgId, {
@@ -230,12 +244,8 @@ function fetchOrgAPI(token) {
                 return resp.json();
             })
             .then(function (data) {
-                var orgData = JSON.parse(localStorage.getItem("orgData"));
-                if (orgData == null) {
-                    var orgData = [];
-                }
+                //stores all organization information into orgData
                 orgData.push(data);
-                localStorage.setItem("orgData", JSON.stringify(orgData));
             });
     }
     init();
