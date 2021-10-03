@@ -23,13 +23,16 @@ footer{
 }
 
 /* Class selectors */
-.card{
+.carousel-img {
+    height: 600px;
+}
+.card {
     border-color: rgb(28, 165, 184);
     border-style: solid;
     border-width: 3px;
 }
 
-.card-title{
+.card-title {
     font-family: 'Architects Daughter', cursive;
     font-size: 25px;
     letter-spacing: -1px;
@@ -37,22 +40,37 @@ footer{
 }
 
 
-.heroMessage{
+.heroMessage {
     font-family: 'Yellowtail', cursive;
     font-size: 40px;
 }
 
 
-.rounded{
+.rounded {
     width: 70%;
     padding-bottom: 10px;
 }
 
-.dropdown{
+.dropdown {
     font-family:Arial, Helvetica, sans-serif;
     margin-right: 40px;
 }
 
-  #map {
+input[type="text"]#distance {
+    color: grey;
+    text-align: right;
+}
+
+input[type="text"]#distance-two {
+    color: black;
+    text-align: right;
+    width: 70px;
+    border-left: 0px;
+    margin: 0 0 0 -7px;
+    background-color: white;
+}
+#map {
     height: 100%;
-  }
+    margin-right: auto;
+    margin-left: auto;
+}
