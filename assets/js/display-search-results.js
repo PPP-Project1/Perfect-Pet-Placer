@@ -40,9 +40,45 @@ function displayMain(i) {
     var distance = document.createElement("p");
     distance.textContent = "Distance: " + petData.distance + " miles";
 
-    mainBody.append(petImgMain, petNameMain, petBreedMain, petAgeMain, distance);
+    var bio = document.createElement("p");
+    bio.textContent = "About Me! : " + petData.description;
+
+    var organization = document.createElement("p");
+    organization.textContent = petData.contact.address.address1 + " " + petData.contact.address.city + " " + petData.contact.address.state;
+    organization.setAttribute("id", "address");
+
+    mainBody.append(petImgMain, petNameMain, petBreedMain, petAgeMain, distance, organization, bio);
 
     mainContainer.append(mainCard);
+
+    //Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
+
+    function fetchGoogleApi() {
+        fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + organization.textContent + "&key=" + apiKey2)
+            .then(function (resp) {
+                return resp.json();
+            })
+            .then(function (googleData) {
+                localStorage.setItem("googleData", JSON.stringify(googleData));
+            });
+    };
+
+    fetchGoogleApi();
+
+    function initMap() {
+        var data = JSON.parse(localStorage.getItem("googleData"));
+        console.log(data);
+
+        var lon1 = (data.results[0].geometry.location.lng);
+        var lat1 = (data.results[0].geometry.location.lat);
+
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: lat1, lng: lon1 },
+            zoom: 10,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+    }
+    initMap();
 }
 
 function displayResults(petData, i) {
@@ -109,50 +145,14 @@ function backPage() {
 
 var map;
 var apiKey2 = "AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8";
-var orgAddress = "23 Doranne Ct Smyrna Ga";
-console.log(orgAddress);
-var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2;
-console.log(geoURL);
-
-// function getAddress(petData, orgData){
-//     orgAddress = orgData.organization.address;
-//     if(petData.organization_id === orgData.organizations.id){
-//         return orgAddress;
-//     }
-// }
-//Call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
-
-function fetchGoogleApi() {
-    fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + orgAddress + "&key=" + apiKey2)
-        .then(function (resp) {
-            return resp.json();
-        })
-        .then(function (googleData) {
-            localStorage.setItem("googleData", JSON.stringify(googleData));
-        });
-};
-
-fetchGoogleApi();
-
-function initMap() {
-    var data = JSON.parse(localStorage.getItem("googleData"));
-    console.log(data);
-
-    var lon1 = (data.results[0].geometry.location.lng);
-    var lat1 = (data.results[0].geometry.location.lat);
-
-    map = new google.maps.Map(document.getElementById("map"), {
-    center: {lat: lat1, lng: lon1},
-    zoom: 10,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
-}
 
 init();
 
-$(".display-main-btn").click(function() {
+//When this button is clicked it should fetch the google api url and the map should initiate
+$(".display-main-btn").click(function () {
     var elmId = $(this).parent().attr("id");
     $(mainContainer).children(0).remove();
     return displayMain(elmId);
+
 })
 $("#back-btn").click(backPage);
