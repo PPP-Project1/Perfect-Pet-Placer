@@ -3,15 +3,21 @@ var mainContainer = document.querySelector(".main-container");
 var orgData = [];
 var map;
 var marker;
-var latLng;
+var latLng = {
+    lat: 33.7490,
+    lng: -84.3880
+};
+var lat = "lat";
+var lng = "lng";
 // var markerCluster;
 
 //call for the google maps API for GeoCoding to grab lon and lat for use in the actual map
-function fetchGoogleApi(orgData) {
-    if (!orgData.address.address1) {
-        var address = orgData.address.city + " " + orgData.address.state;
+function fetchGoogleApi(targetOrg) {
+    console.dir(targetOrg.organization.address);
+    if (!targetOrg.organization.address.address1) {
+        var address = targetOrg.organization.address.city + " " + targetOrg.organization.address.state;
     } else {
-        var address = orgData.address.address1 + " " + orgData.address.city + " " + orgData.address.state;
+        var address = targetOrg.organization.address.address1 + " " + targetOrg.organization.address.city + " " + targetOrg.organization.address.state;
     }
 
     fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyAnFzh7TbHHX423_Cve8xpaB3sWJ05-rO8")
@@ -19,8 +25,11 @@ function fetchGoogleApi(orgData) {
             return resp.json();
         })
         .then(function (data) {
-            latLng = data.results[0].geometry.location;
+            latLng[lat] = (data.results[0].geometry.location.lat);
+            latLng[lng] = (data.results[0].geometry.location.lng);
+            console.log(latLng);
         });
+    initMap();
 };
 
 function displayMain(i) {
@@ -70,7 +79,7 @@ function displayMain(i) {
     organization.setAttribute("id", "address");
 
     var modalBtn = document.createElement("button");
-    modalBtn.classList.add("btn btn-block custom-btn");
+    modalBtn.classList.add("btn");
     modalBtn.setAttribute("type", "button");
     modalBtn.setAttribute("data-toggle", "modal");
     modalBtn.setAttribute("data-target", "contact-modal");
@@ -80,17 +89,14 @@ function displayMain(i) {
 
     mainContainer.append(mainCard);
 
-    var orgData = JSON.parse(localStorage.getItem("orgData"));
-    var allOrgData = orgData.organizations[i]
-
     var modalContainer = document.createElement("div")
-    modalContainer.classList.add("modal fade custom-modal");
-    modalContainer.setAttribute("id", "contact-modal")
-    modalContainer.setAttribute("tabindex", "-1")
-    modalContainer.setAttribute("role", "dialog")
+    modalContainer.classList.add("modal");
+    modalContainer.setAttribute("id", "contact-modal");
+    modalContainer.setAttribute("tabindex", "-1");
+    modalContainer.setAttribute("role", "dialog");
 
     var modalStyle = document.createElement('div');
-    modalStyle.classList.add("modal-dialog modal-lg modal-dialog-centered")
+    modalStyle.classList.add("modal-dialog");
 
     var modalContent = document.createElement("div");
     modalContent.classList.add("modal-content");
@@ -102,22 +108,22 @@ function displayMain(i) {
     headerText.textContent = "Organization Contact Info";
 
     var orgName = document.createElement("p")
-    orgName.textContent = "Organization Name" + allOrgData.name
+    orgName.textContent = "Organization Name";
 
     var orgWeb = document.createElement("p");
-    orgWeb.textContent = "Website: " + allOrgData.url
+    orgWeb.textContent = "Website: ";
 
     var orgEmail = document.createElement("p");
-    orgEmail.textContent = "Email: " + allOrgData.email
+    orgEmail.textContent = "Email: ";
 
     var orgPhone = document.createElement("p");
-    orgPhone.textContent = "Phone Number: " + allOrgData.Phone
+    orgPhone.textContent = "Phone Number: ";
 
     var modalFooter = document.createElement("div");
     modalFooter.classList.add("modal-footer");
 
     var closeBtn = document.createElement("button");
-    closeBtn.classList.add("btn btn-secondary");
+    closeBtn.classList.add("btn");
     closeBtn.setAttribute("type", "button")
     closeBtn.setAttribute("data-dismiss", "modal")
     closeBtn.textContent = "Close";
@@ -129,7 +135,6 @@ function displayMain(i) {
     modalContainer.append(modalStyle);
 
     fetchGoogleApi(orgData[i]);
-    console.log(orgData[i]);
 }
 
 function displayResults(petData, i) {
@@ -190,10 +195,10 @@ function displayResults(petData, i) {
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 10,
-        center: { lat: 33.753746, lng: -84.386330},
+        center: latLng,
     });
     marker = new google.maps.Marker({
-        position: { lat: 33.753746, lng: -84.386330},
+        position: latLng,
         map: map,
     });
 }
@@ -204,7 +209,10 @@ function init() {
     if (!petData) {
         resultsContainer.innerHTML = "<h3> NO results found, go back and search again!</h3>";
     } else {
-        for (var i = 0; i < 9; i++) {
+        for (var i = 0; i < petData.animals.length; i++) {
+            if (i === 10) {
+                return;
+            }
             displayResults(petData.animals[i], i);
         }
     }
@@ -229,8 +237,11 @@ function fetchToken() {
 function fetchOrgAPI(token) {
     var petData = JSON.parse(localStorage.getItem("petData"));
 
-    for (var i = 0; i < 9; i++) {
+    for (var i = 0; i < petData.animals.length; i++) {
         //for loop that grabs petdata organization from each point of index
+        if (i === 10) {
+            return;
+        }
         var orgId = petData.animals[i].organization_id;
 
         fetch("https://api.petfinder.com/v2/organizations/" + orgId, {
@@ -248,10 +259,7 @@ function fetchOrgAPI(token) {
                 orgData.push(data);
             });
     }
-    init();
 };
-
-//modal
 
 //moves user back to landing page
 function backPage() {
@@ -260,6 +268,7 @@ function backPage() {
 }
 
 fetchToken();
+init();
 
 //When this button is clicked it should fetch the google api url and the map should initiate
 $(".display-main-btn").click(function () {
